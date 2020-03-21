@@ -169,8 +169,8 @@ let mentions = message.mentions.users.first();
   ) {
     let cooldown = 8.64e7;
     let Daily = time[message.author.id];
-    if (Daily !== null && cooldown - (dateFormat(now, "S") - Daily) > 0) {
-      let times = cooldown - (dateFormat(now, "S") - Daily);
+    if (Daily !== null && cooldown - (sec(dateFormat(now, "HH:MM:ss")) - Daily) > 0) {
+      let times = cooldown - (sec(dateFormat(now, "HH:MM:ss")) - Daily);
       message.channel.send( `**:rolling_eyes: | ${ message.author.username }, your daily credits refreshes in ${sec(times, { verbose: true })}.**`);
       fs.writeFile("./time.json", JSON.stringify(time), function(e) {
         if (e) throw e;
@@ -178,7 +178,7 @@ let mentions = message.mentions.users.first();
   
     } else {
       let ammount = [445, 521, 368, 601, 721, 584, 675, 691];
-      time[message.author.id] = dateFormat(now, "S");
+      time[message.author.id] = sec(dateFormat(now, "HH:MM:ss"));
       credits[message.author.id].credits += ammount[Math.floor(Math.random() * ammount.length)];
       let msg = `**:moneybag: ${message.author.username}, You got :dollar: `+ammount[Math.floor(Math.random() * ammount.length)]+` daily credits!**`
       message.channel.send(msg);
@@ -193,14 +193,16 @@ client.on("message", message => {
 
   let args = message.content.split(" ");
   const mentions = message.mentions.users.first();
-  if(args[0].toLowerCase() === `${prefix}rep`) {  
+  if(args[0].toLowerCase() === `${prefix}rep`) {
        const mentionn = message.mentions.users.first();
-     let cooldown = 24 * 3600;
+     let cooldown = 24 * 60 * 60;
     let repi = timess[message.author.id];
-    if (repi !== null && cooldown - (dateFormat(now, "ss") - repi) > 0) {
-      let tmes = cooldown - (dateFormat(now, "ss") - repi);
+    if (repi !== null && cooldown - (sec(dateFormat(now, "HH:MM:ss")) - repi) > 0) {
+      let tmes = cooldown - (sec(dateFormat(now, "HH:MM:ss")) - repi);
       message.channel.send(
-        `**:stopwatch: | ${message.author.username}, you can raward more reputation in ${sec(tmes)}.**`
+        `**:stopwatch: | ${message.author.username}, you can raward more reputation in ${pretty(tmes, {
+          verbose: true
+        })}.**`
       );
       fs.writeFile("./timess.json", JSON.stringify(timess), function(e) {
         if (e) throw e;
@@ -208,7 +210,7 @@ client.on("message", message => {
     } else {
       if(!mentionn) return message.channel.send(`**:rolling_eyes: | ${message.author.username}**, The user could not be found.`);
      if(mentionn.id == message.author.id) return message.channel.send(`:rolling_eyes: | ${message.author.username}**, You cant give yourself a reputation !**`);
-      timess[message.author.id] = dateFormat(now, "ss");
+      timess[message.author.id] = sec(dateFormat(now, "HH:MM:ss"));
       rep[mentionn.id].rep += Math.floor(+1);
          message.channel.send(`**🆙  |  ${message.author.username} has given ${mentionn} a reputation point!**`)
    fs.writeFile("./rep.json", JSON.stringify(rep), function(e) {

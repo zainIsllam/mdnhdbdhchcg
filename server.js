@@ -197,8 +197,8 @@ client.on("message", message => {
        const mentionn = message.mentions.users.first();
      let cooldown = 24 * 3600;
     let repi = timess[message.author.id];
-    if (repi !== null && cooldown - (dateFormat(now, "S") - repi) > 0) {
-      let tmes = cooldown - (dateFormat(now, "S") - repi);
+    if (repi !== null && cooldown - (dateFormat(now, "ss") - repi) > 0) {
+      let tmes = cooldown - (dateFormat(now, "ss") - repi);
       message.channel.send(
         `**:stopwatch: | ${message.author.username}, you can raward more reputation in ${sec(tmes)}.**`
       );
@@ -208,7 +208,7 @@ client.on("message", message => {
     } else {
       if(!mentionn) return message.channel.send(`**:rolling_eyes: | ${message.author.username}**, The user could not be found.`);
      if(mentionn.id == message.author.id) return message.channel.send(`:rolling_eyes: | ${message.author.username}**, You cant give yourself a reputation !**`);
-      timess[message.author.id] = dateFormat(now, "S");
+      timess[message.author.id] = dateFormat(now, "ss");
       rep[mentionn.id].rep += Math.floor(+1);
          message.channel.send(`**🆙  |  ${message.author.username} has given ${mentionn} a reputation point!**`)
    fs.writeFile("./rep.json", JSON.stringify(rep), function(e) {

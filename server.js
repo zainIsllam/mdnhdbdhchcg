@@ -167,7 +167,7 @@ let mentions = message.mentions.users.first();
   if (
     args[0].toLowerCase() === `${prefix}daily`
   ) {
-    let cooldown = 8.64e7;
+    let cooldown = 86400000;
     let Daily = time[message.author.id];
     if (Daily !== null && cooldown - (sec(dateFormat(now, "HH:MM:ss")) - Daily) > 0) {
       let times = cooldown - (sec(dateFormat(now, "HH:MM:ss")) - Daily);
@@ -195,7 +195,7 @@ client.on("message", message => {
   const mentions = message.mentions.users.first();
   if(args[0].toLowerCase() === `${prefix}rep`) {
        const mentionn = message.mentions.users.first();
-     let cooldown = 24 * 60 * 60;
+     let cooldown = 86400000;
     let repi = timess[message.author.id];
     if (repi !== null && cooldown - (sec(dateFormat(now, "HH:MM:ss")) - repi) > 0) {
       let tmes = cooldown - (sec(dateFormat(now, "HH:MM:ss")) - repi);
@@ -217,6 +217,15 @@ client.on("message", message => {
         if (e) throw e;
       });
        }
+     }
+});
+
+client.on("message", message => {
+
+  let args = message.content.split(" ");
+  const mentions = message.mentions.users.first();
+  if(args[0].toLowerCase() === `${prefix}test`) {
+message.channel.send(dateFormat(now, "HH:MM:ss"))
      }
 });
 

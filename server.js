@@ -35,7 +35,6 @@ const Discord = require("discord.js");
 const fetch = require("node-fetch");
 const data = {};
 client.login(TOKEN);
-var now = new Date();
 
 var sec = require('sec');
 const credits = JSON.parse(fs.readFileSync("./credits.json"));
@@ -188,7 +187,7 @@ let mentions = message.mentions.users.first();
     }
   }
 });
-
+var now = new Date();
 client.on("message", message => {
 
   let args = message.content.split(" ");
@@ -197,8 +196,8 @@ client.on("message", message => {
        const mentionn = message.mentions.users.first();
      let cooldown = 86400000;
     let repi = timess[message.author.id];
-    if (repi !== null && cooldown - (sec(dateFormat(now, "HH:MM:ss")) - repi) > 0) {
-      let tmes = cooldown - (sec(dateFormat(now, "HH:MM:ss")) - repi);
+    if (repi !== null && cooldown - ((Date.now()) - repi) > 0) {
+      let tmes = cooldown - ((Date.now()) - repi);
       message.channel.send(
         `**:stopwatch: | ${message.author.username}, you can raward more reputation in ${pretty(tmes, {
           verbose: true
@@ -210,7 +209,7 @@ client.on("message", message => {
     } else {
       if(!mentionn) return message.channel.send(`**:rolling_eyes: | ${message.author.username}**, The user could not be found.`);
      if(mentionn.id == message.author.id) return message.channel.send(`:rolling_eyes: | ${message.author.username}**, You cant give yourself a reputation !**`);
-      timess[message.author.id] = sec(dateFormat(now, "HH:MM:ss"));
+      timess[message.author.id] = (Date.now());
       rep[mentionn.id].rep += Math.floor(+1);
          message.channel.send(`**🆙  |  ${message.author.username} has given ${mentionn} a reputation point!**`)
    fs.writeFile("./rep.json", JSON.stringify(rep), function(e) {
@@ -225,7 +224,10 @@ client.on("message", message => {
   let args = message.content.split(" ");
   const mentions = message.mentions.users.first();
   if(args[0].toLowerCase() === `${prefix}test`) {
-message.channel.send(dateFormat(now, "HH:MM:ss"))
+message.channel.send(pretty(sec(dateFormat(now, "HH:MM:ss"))), {
+          verbose: true
+        })
+                     
      }
 });
 

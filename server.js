@@ -224,9 +224,7 @@ client.on("message", message => {
   let args = message.content.split(" ");
   const mentions = message.mentions.users.first();
   if(args[0].toLowerCase() === `${prefix}test`) {
-message.channel.send(pretty(sec(dateFormat(now, "HH:MM:ss"))), {
-          verbose: true
-        })
+message.channel.send(pretty(1335669975, {verbose: true}))
                      
      }
 });

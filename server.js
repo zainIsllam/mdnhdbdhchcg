@@ -34,17 +34,10 @@ var table = require("table").table;
 const Discord = require("discord.js");
 const fetch = require("node-fetch");
 const data = {};
-var Datie = new Date().toLocaleString("en-US", {
-  timeZone: "America/New_York",
-  timeZoneName: "short",
-  weekday: "short",
-  month: "long",
-  day: "2-digit",
-  year: "numeric",
-  hour: "2-digit",
-  minute: "2-digit"
-});
+client.login(TOKEN);
+var now = new Date();
 
+var sec = require('sec');
 const credits = JSON.parse(fs.readFileSync("./credits.json"));
 const rep = JSON.parse(fs.readFileSync("./rep.json"));
 var time = require("./time.json");
@@ -176,16 +169,16 @@ let mentions = message.mentions.users.first();
   ) {
     let cooldown = 8.64e7;
     let Daily = time[message.author.id];
-    if (Daily !== null && cooldown - (Datie.now() - Daily) > 0) {
-      let times = cooldown - (Datie.now() - Daily);
-      message.channel.send( `**:rolling_eyes: | ${ message.author.username }, your daily credits refreshes in ${pretty(times, { verbose: true })}.**`);
+    if (Daily !== null && cooldown - (Date.now() - Daily) > 0) {
+      let times = cooldown - (Date.now() - Daily);
+      message.channel.send( `**:rolling_eyes: | ${ message.author.username }, your daily credits refreshes in ${sec(times, { verbose: true })}.**`);
       fs.writeFile("./time.json", JSON.stringify(time), function(e) {
         if (e) throw e;
       });
   
     } else {
       let ammount = [445, 521, 368, 601, 721, 584, 675, 691];
-      time[message.author.id] = Datie.now();
+      time[message.author.id] = Date.now();
       credits[message.author.id].credits += ammount[Math.floor(Math.random() * ammount.length)];
       let msg = `**:moneybag: ${message.author.username}, You got :dollar: `+ammount[Math.floor(Math.random() * ammount.length)]+` daily credits!**`
       message.channel.send(msg);
@@ -202,24 +195,22 @@ client.on("message", message => {
   const mentions = message.mentions.users.first();
   if(args[0].toLowerCase() === `${prefix}rep`) {  
        const mentionn = message.mentions.users.first();
-     let cooldown = 8.64e7;
+     let cooldown = 24 * 3600;
     let repi = timess[message.author.id];
     if (repi !== null && cooldown - (Date.now() - repi) > 0) {
       let tmes = cooldown - (Date.now() - repi);
       message.channel.send(
-        `**<:Gennys_hmm:683642941503176705> - ${message.author.username}, you can raward more reputation in ${pretty(tmes, {
-          verbose: true
-        })}.**`
+        `**:stopwatch: | ${message.author.username}, you can raward more reputation in ${sec(tmes)}.**`
       );
       fs.writeFile("./timess.json", JSON.stringify(timess), function(e) {
         if (e) throw e;
       });
     } else {
-      if(!mentionn) return message.channel.send(`**<:Gennys_Detective:683643216507043892> - ${message.author.username}, The user could not be found.**`);
-     if(mentionn.id == message.author.id) return message.channel.send(`<:Gennys_Detective:683643216507043892> - **${message.author.username}, You cant give yourself a reputation !**`);
+      if(!mentionn) return message.channel.send(`**:rolling_eyes: | ${message.author.username}**, The user could not be found.`);
+     if(mentionn.id == message.author.id) return message.channel.send(`:rolling_eyes: | ${message.author.username}**, You cant give yourself a reputation !**`);
       timess[message.author.id] = Date.now();
       rep[mentionn.id].rep += Math.floor(+1);
-         message.channel.send(`** :up:  |  ${message.author.username} has given ${mentionn} a reputation point!**`)
+         message.channel.send(`**🆙  |  ${message.author.username} has given ${mentionn} a reputation point!**`)
    fs.writeFile("./rep.json", JSON.stringify(rep), function(e) {
         if (e) throw e;
       });
@@ -236,7 +227,7 @@ client.on("message", message => {
         message.channel.startTyping();
     setTimeout(() => {
       message.channel.stopTyping();
-    }, Math.random() * (1 - 3) + 1 * 1000).then(
+    }, Math.random() * (1 - 3) + 1 * 1000)
          message.channel.send({
         files: [
           {
@@ -245,7 +236,6 @@ client.on("message", message => {
           }
         ]
       })
-      )
   }
   if(member) {
         message.channel.startTyping();

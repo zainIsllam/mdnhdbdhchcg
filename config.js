@@ -1,7 +1,4 @@
 module.exports = {
-    TOKEN: '', 
-    YT_API_KEY: '',
+    TOKEN: 'NjkwOTU3MTgxNTA3NjAwMzk1.XnZAZA.1suN5BhOHqOD9tZVx77lA7x0F8c', 
     prefix: '#',
-      OWNER_ID: "458997221170479124",
-    devs: ['458997221170479124']
 }

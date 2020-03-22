@@ -35,8 +35,16 @@ const Discord = require("discord.js");
 const fetch = require("node-fetch");
 const data = {};
 client.login(TOKEN);
-
-
+var Datie = new Date().toLocaleString("en-US", {
+  timeZone: "America/New_York",
+  timeZoneName: "short",
+  weekday: "short",
+  month: "long",
+  day: "2-digit",
+  year: "numeric",
+  hour: "2-digit",
+  minute: "2-digit"
+});
 
 const credits = JSON.parse(fs.readFileSync("./credits.json"));
 const rep = JSON.parse(fs.readFileSync("./rep.json"));
@@ -224,6 +232,6 @@ client.on("message", message => {
   let args = message.content.split(" ");
   const mentions = message.mentions.users.first();
   if(args[0].toLowerCase() === `!!test`) {
- message.channel.send(Date.now())
+ message.channel.send(sec(Datie))
      }
 });

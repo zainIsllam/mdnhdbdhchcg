@@ -36,9 +36,14 @@ const fetch = require("node-fetch");
 const data = {};
 client.login(TOKEN);
 var Datie = new Date().toLocaleString("en-US", {
-  hour: "numeric",
-  minute: "numeric",
-  seconde: "numeric"
+  timeZone: "America/New_York",
+  timeZoneName: "short",
+  weekday: "short",
+  month: "long",
+  day: "2-digit",
+  year: "numeric",
+  hour: "2-digit",
+  minute: "2-digit"
 });
 
 const credits = JSON.parse(fs.readFileSync("./credits.json"));
@@ -171,9 +176,9 @@ let mentions = message.mentions.users.first();
     args[0].toLowerCase() === `${prefix}daily`
   ) {
     let cooldown = 60 * 3600;
-    let Daily = time[message.author.id];
-    if (Daily !== null && cooldown - (Date.now() - Daily) > 0) {
-      let times = cooldown - ((Date.now() - 9999) - Daily);
+    let Daily = time[message.author.id].time;
+    if (Daily !== null && cooldown - ((sec(pretty(Date.now(), {colonNotation: true})) * 1000) - Daily) > 0) {
+      let times = cooldown - ((sec(pretty(Date.now(), {colonNotation: true})) * 1000) - Daily);
       message.channel.send( `**<:Gennys_hmm:683642941503176705> - ${ message.author.username }, your daily credits refreshes in ${pretty(times, { verbose: true })}.**`);
       fs.writeFile("./time.json", JSON.stringify(time), function(e) {
         if (e) throw e;
@@ -181,7 +186,9 @@ let mentions = message.mentions.users.first();
   
     } else {
       let ammount = [445, 521, 368, 601, 721, 584, 675, 691];
-      time[message.author.id] = Date.now();
+      time[message.author.id] = {
+       time: Math.floor(sec(pretty(Date.now(), {colonNotation: true})) * 1000)
+    }
       credits[message.author.id].credits += ammount[Math.floor(Math.random() * ammount.length)];
       let msg = `**:moneybag: ${message.author.username}, You got :dollar: `+ammount[Math.floor(Math.random() * ammount.length)]+` daily credits!**`
       message.channel.send(msg);
@@ -227,6 +234,6 @@ client.on("message", message => {
   let args = message.content.split(" ");
   const mentions = message.mentions.users.first();
   if(args[0].toLowerCase() === `!!test`) {
- message.channel.send((Datie))
+ message.channel.send(sec(pretty(Date.now(), {colonNotation: true})))
      }
 });

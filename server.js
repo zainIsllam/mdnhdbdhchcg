@@ -68,6 +68,14 @@ client.on("message", async message => {
     rep[author] = {
       rep: 0
     };
+    if (!timess[author])
+    timess[author] = {
+      time: 0
+    };
+    if (!time[author])
+    time[author] = {
+      time: 0
+    };
 let mentions = message.mentions.users.first();
   if(mentions) {
       if (!credits[mentions.id])
@@ -91,12 +99,12 @@ let mentions = message.mentions.users.first();
   ) {
     const mention = message.mentions.users.first() || message.author;
     const mentionn = message.mentions.users.first();
-    if (!args[2] && !mention) {
+    if (!args[2] && !mentionn) {
       message.channel.send(
         `**:bank: | ${mention.username}, Your :credit_card: balance is \`$${credits[mention.id].credits}\`**`
       );
     }
-    if (!args[2] && mention) {
+   else if (!args[2] && mentionn) {
       message.channel.send(
         `** ${mention.username}, :credit_card: balance is \`$${credits[mention.id].credits}\`**`
       );
@@ -185,11 +193,11 @@ let mentions = message.mentions.users.first();
   if (
     args[0].toLowerCase() === `${prefix}daily`
   ) {
-    let cooldown = 60 * 3600;
+    let cooldown = 8.64e7;
     let Daily = time[message.author.id].time;
     if (Daily !== null && cooldown - ((sec(pretty(Date.now(), {colonNotation: true})) * 1000) - Daily) > 0) {
       let times = cooldown - ((sec(pretty(Date.now(), {colonNotation: true})) * 1000) - Daily);
-      message.channel.send( `**<:Gennys_hmm:683642941503176705> - ${ message.author.username }, your daily credits refreshes in ${pretty(times, { verbose: true })}.**`);
+      message.channel.send( `**:rolling_eyes: | ${ message.author.username }, your daily credits refreshes in ${pretty(times, { verbose: true })}.**`);
       fs.writeFile("./time.json", JSON.stringify(time), function(e) {
         if (e) throw e;
       });
@@ -256,8 +264,22 @@ client.on("message", async message => {
           }
         ]
       });
-      } else if(args[1] && !user) {
-          client.fetchUser(args[1]).then(user => {
+      }
+      if(user && !args[0]) {
+    message.channel.startTyping();
+    setTimeout(() => {
+      message.channel.stopTyping();
+    }, Math.random() * (1 - 3) + 1 * 1000);
+      message.channel.send({
+        files: [
+          {
+            name: "nekoavatar.png",
+            attachment: `https://api.probot.io/profile/${user.id}`
+          }
+        ]
+      });
+      }else if(args[1] && !user) {
+          client.fetchUser(args[1]).then(userr => {
   message.channel.startTyping();
     setTimeout(() => {
       message.channel.stopTyping();
@@ -266,7 +288,7 @@ client.on("message", async message => {
         files: [
           {
             name: "nekoavatar.png",
-            attachment: `https://api.probot.io/profile/${message.author.id}`
+            attachment: `https://api.probot.io/profile/${userr.id}`
           }
         ]
       });

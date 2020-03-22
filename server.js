@@ -163,7 +163,7 @@ let mentions = message.mentions.users.first();
                 errors: ["time"]
               })
               .then(collected => {
-                if (collected.first().content === num) {
+                if (collected.content === num) {
                   message.channel.send(
                     `**:moneybag: - ${message.author.username}, has transferred \`$${resulting}\` to ${mentionn}**`
                   );
@@ -247,11 +247,12 @@ client.on("message", message => {
      }
 });
 
-client.on("message", async message => {
-  var user = message.mentions.users.first();
+client.on("message", message => {
   let args = message.content.split(" ");
-  if (message.content.toLowerCase() === prefix + "profile") {
-    if(args[0] && !user) {
+  if (message.content.startsWith(prefix+"profile")) {
+  let member = message.mentions.users.first();
+
+  if(args[0] && !args[1]) {
     message.channel.startTyping();
     setTimeout(() => {
       message.channel.stopTyping();
@@ -264,8 +265,8 @@ client.on("message", async message => {
           }
         ]
       });
-      }
-      if(user && !args[0]) {
+  }
+  if(member) {
     message.channel.startTyping();
     setTimeout(() => {
       message.channel.stopTyping();
@@ -274,11 +275,11 @@ client.on("message", async message => {
         files: [
           {
             name: "nekoavatar.png",
-            attachment: `https://api.probot.io/profile/${user.id}`
+            attachment: `https://api.probot.io/profile/${member.id}`
           }
         ]
-      });
-      }else if(args[1] && !user) {
+      })
+     }else if(args[1] && !member) {
           client.fetchUser(args[1]).then(userr => {
   message.channel.startTyping();
     setTimeout(() => {
@@ -293,5 +294,45 @@ client.on("message", async message => {
         ]
       });
   })
-}}
+    }
+  }
+});
+
+client.on("message", message => {
+  let args = message.content.split(" ");
+  if (message.content.startsWith(prefix+"avatar")) {
+  let member = message.mentions.users.first();
+
+  if(args[0] && !args[1]) {
+        const embed = new Discord.RichEmbed()
+      .setAuthor(message.author.tag, message.author.avatarURL)
+      .setColor("#51545b")
+      .setTitle("Avatar Link")
+      .setURL(`${message.author.avatarURL}`)
+      .setImage(`${message.author.avatarURL}`)
+      .setFooter("Requested by" + message.author.tag, message.author.avatarURL);
+     message.channel.sendEmbed(embed);
+  }
+  if(member) {
+      const embed = new Discord.RichEmbed()
+      .setAuthor(member.tag, member.avatarURL)
+      .setColor("#51545b")
+      .setTitle("Avatar Link")
+      .setURL(`${member.avatarURL}`)
+      .setImage(`${member.avatarURL}`)
+      .setFooter("Requested by" + message.author.tag, message.author.avatarURL);
+     message.channel.sendEmbed(embed);
+     }else if(args[1] && !member) {
+          client.fetchUser(args[1]).then(user => {
+    const embed = new Discord.RichEmbed()
+      .setAuthor(user.tag, user.avatarURL)
+      .setColor("#51545b")
+      .setTitle("Avatar Link")
+      .setURL(`${user.avatarURL}`)
+      .setImage(`${user.avatarURL}`)
+      .setFooter("Requested by" + message.author.tag, message.author.avatarURL);
+     message.channel.sendEmbed(embed);
+  })
+    }
+  }
 });

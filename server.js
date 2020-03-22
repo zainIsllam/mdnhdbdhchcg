@@ -27,7 +27,6 @@ var figlet = require("figlet");
 const util = require("util");
 const ms = require("ms");
 var sec = require('sec');
-
 const jimp = require("jimp");
 const guild = require("guild");
 const dateFormat = require("dateformat");
@@ -46,6 +45,10 @@ var Datie = new Date().toLocaleString("en-US", {
   year: "numeric",
   hour: "2-digit",
   minute: "2-digit"
+});
+client.on("ready", function() {
+  client.user.setStatus("online");
+    client.user.setGame("#help");
 });
 
 const credits = JSON.parse(fs.readFileSync("./credits.json"));
@@ -88,9 +91,14 @@ let mentions = message.mentions.users.first();
   ) {
     const mention = message.mentions.users.first() || message.author;
     const mentionn = message.mentions.users.first();
-    if (!args[2]) {
+    if (!args[2] && !mention) {
       message.channel.send(
-        `**${mention.username}, Your :credit_card: balance is \`$${credits[mention.id].credits}\`**`
+        `**:bank: | ${mention.username}, Your :credit_card: balance is \`$${credits[mention.id].credits}\`**`
+      );
+    }
+    if (!args[2] && mention) {
+      message.channel.send(
+        `** ${mention.username}, :credit_card: balance is \`$${credits[mention.id].credits}\`**`
       );
     } else if (mentionn && args[2]) {
       if (isNaN(args[2]))
@@ -211,7 +219,7 @@ client.on("message", message => {
     if (Daily !== null && cooldown - ((sec(pretty(Date.now(), {colonNotation: true})) * 1000) - Daily) > 0) {
       let tmes = cooldown - ((sec(pretty(Date.now(), {colonNotation: true})) * 1000) - Daily);
       message.channel.send(
-        `**<:Gennys_hmm:683642941503176705> - ${message.author.username}, you can raward more reputation in ${pretty(tmes, {
+        `**:stopwatch: | ${message.author.username}, you can raward more reputation in ${pretty(tmes, {
           verbose: true
         })}.**`
       );
@@ -219,8 +227,8 @@ client.on("message", message => {
         if (e) throw e;
       });
     } else {
-      if(!mentionn) return message.channel.send(`**<:Gennys_Detective:683643216507043892> - ${message.author.username}, The user could not be found.**`);
-     if(mentionn.id == message.author.id) return message.channel.send(`<:Gennys_Detective:683643216507043892> - **${message.author.username}, You cant give yourself a reputation !**`);
+      if(!mentionn) return message.channel.send(`**:rolling_eyes: | ${message.author.username}**, The user could not be found.`);
+     if(mentionn.id == message.author.id) return message.channel.send(`:rolling_eyes:  | ${message.author.username}**, You cant give yourself a reputation !**`);
       timess[message.author.id] = pretty(sec(dateFormat("HH:MM:ss")) * 1000);
       rep[mentionn.id].rep += Math.floor(+1);
          message.channel.send(`** :up:  |  ${message.author.username} has given ${mentionn} a reputation point!**`)
@@ -232,25 +240,36 @@ client.on("message", message => {
 });
 
 client.on("message", async message => {
-  var user = message.mentions.users.first() || message.author;
-  if (message.content.toLowerCase() === prefix + "nav") {
-    const options = {
-      url: "https://nekos.life/api/v2/img/avatar",
-      json: true
-    };
+  var user = message.mentions.users.first();
+  let args = message.content.split(" ");
+  if (message.content.toLowerCase() === prefix + "profile") {
+    if(args[0] && !user) {
     message.channel.startTyping();
     setTimeout(() => {
       message.channel.stopTyping();
     }, Math.random() * (1 - 3) + 1 * 1000);
-    get(options).then(body => {
       message.channel.send({
         files: [
           {
             name: "nekoavatar.png",
-            attachment: body.url
+            attachment: `https://api.probot.io/profile/${message.author.id}`
           }
         ]
       });
-    });
-  }
+      } else if(args[1] && !user) {
+          client.fetchUser(args[1]).then(user => {
+  message.channel.startTyping();
+    setTimeout(() => {
+      message.channel.stopTyping();
+    }, Math.random() * (1 - 3) + 1 * 1000);
+      message.channel.send({
+        files: [
+          {
+            name: "nekoavatar.png",
+            attachment: `https://api.probot.io/profile/${message.author.id}`
+          }
+        ]
+      });
+  })
+}}
 });

@@ -188,7 +188,7 @@ let mentions = message.mentions.users.first();
       let ammount = [445, 521, 368, 601, 721, 584, 675, 691];
       time[message.author.id] = {
        time: Math.floor(sec(pretty(Date.now(), {colonNotation: true})) * 1000)
-    }
+      }
       credits[message.author.id].credits += ammount[Math.floor(Math.random() * ammount.length)];
       let msg = `**:moneybag: ${message.author.username}, You got :dollar: `+ammount[Math.floor(Math.random() * ammount.length)]+` daily credits!**`
       message.channel.send(msg);
@@ -205,9 +205,9 @@ client.on("message", message => {
   if(args[0].toLowerCase() === `${prefix}rep`) {  
        const mentionn = message.mentions.users.first();
      let cooldown = 8.64e7;
-    let repi = timess[message.author.id];
-    if (repi !== null && cooldown - (pretty(sec(dateFormat("HH:MM:ss")) * 1000) - repi) > 0) {
-      let tmes = cooldown - (pretty(sec(dateFormat("HH:MM:ss")) * 1000) - repi);
+    let Daily = time[message.author.id].time;
+    if (Daily !== null && cooldown - ((sec(pretty(Date.now(), {colonNotation: true})) * 1000) - Daily) > 0) {
+      let tmes = cooldown - ((sec(pretty(Date.now(), {colonNotation: true})) * 1000) - Daily);
       message.channel.send(
         `**<:Gennys_hmm:683642941503176705> - ${message.author.username}, you can raward more reputation in ${pretty(tmes, {
           verbose: true

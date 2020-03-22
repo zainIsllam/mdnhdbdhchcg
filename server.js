@@ -26,6 +26,8 @@ const fs = require("fs");
 var figlet = require("figlet");
 const util = require("util");
 const ms = require("ms");
+var sec = require('sec');
+
 const jimp = require("jimp");
 const guild = require("guild");
 const dateFormat = require("dateformat");
@@ -229,11 +231,26 @@ client.on("message", message => {
      }
 });
 
-var sec = require('sec');
-client.on("message", message => {
-  let args = message.content.split(" ");
-  const mentions = message.mentions.users.first();
-  if(args[0].toLowerCase() === `!!test`) {
- message.channel.send(sec(pretty(Date.now(), {colonNotation: true})))
-     }
+client.on("message", async message => {
+  var user = message.mentions.users.first() || message.author;
+  if (message.content.toLowerCase() === prefix + "nav") {
+    const options = {
+      url: "https://nekos.life/api/v2/img/avatar",
+      json: true
+    };
+    message.channel.startTyping();
+    setTimeout(() => {
+      message.channel.stopTyping();
+    }, Math.random() * (1 - 3) + 1 * 1000);
+    get(options).then(body => {
+      message.channel.send({
+        files: [
+          {
+            name: "nekoavatar.png",
+            attachment: body.url
+          }
+        ]
+      });
+    });
+  }
 });

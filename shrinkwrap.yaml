@@ -9,7 +9,6 @@ dependencies:
   countdown: 2.6.0
   dateformat: 3.0.3
   discord.js: 11.6.3
-  discordstreamer: 1.0.0
   enmap: 5.2.4
   express: 4.17.1
   figlet: 1.3.0
@@ -18,6 +17,7 @@ dependencies:
   fs: 0.0.2
   fs-nextra: 0.4.7
   get-json: 1.0.1
+  get-stream: 5.1.0
   get-youtube-id: 1.0.1
   gm: 1.23.1
   guild: 1.2.2
@@ -50,6 +50,7 @@ dependencies:
   to-time: 1.0.2
   unirest: 0.6.0
   wget-improved: 3.2.0
+  word-stream: 2.0.0
   youtube-info: 1.3.2
   ytdl-core: 2.0.0
 packages:
@@ -633,6 +634,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-g4qZLan51zfg9LLbC+YrsJ3Qxeg=
+  /binary-split/1.0.5:
+    dependencies:
+      through2: 2.0.5
+    dev: false
+    resolution:
+      integrity: sha512-AQ5fcBrUU5hoIafkEvNKqxT+2xbqlSqAXef6IdCQr5wpHu9E7NGM6rTAlYJYbtxvAvjfx8nJkBy6rNlbPPI+Pw==
   /bindings/1.2.1:
     dev: false
     resolution:
@@ -651,10 +658,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-j4OH8f6Qg2bGuWfRiltT2HYGx0e1QcBTrK9KAHNMwMZdQnDZFk0ZSYIpADjYCB3U12nicC5tVJwSIhwOWjb4RQ==
-  /bluebird/2.11.0:
-    dev: false
-    resolution:
-      integrity: sha1-U0uQM8AiyVecVro7Plpcqvu2UOE=
   /bluebird/3.7.2:
     dev: false
     resolution:
@@ -1073,17 +1076,6 @@ packages:
       sodium: ^2.0.3
     resolution:
       integrity: sha512-dwIzHB5GPU9O/WiNw42d0yco0JED5bOjCPiHwU9VSSCkEhnyOdx5iqt7Dl2PQZAMNzWPI/t9oyCziOuzFlwm3Q==
-  /discordstreamer/1.0.0:
-    dependencies:
-      eris: github.com/abalabahaha/Eris/fce520513053eb1f4466130d8075126cf21024fc
-      rethinkdb: 2.4.2
-      ytdl-core: 0.7.24
-    dev: false
-    engines:
-      node: ^5.x.x
-      npm: '>=3.x.x'
-    resolution:
-      integrity: sha1-IC/PXzeM69IJP6d77Urkh8vwRrQ=
   /dom-serializer/0.1.1:
     dependencies:
       domelementtype: 1.3.1
@@ -1442,6 +1434,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-buUOE2bLaxIsF6zGIrwvsTVlvgU85qwAWf0Hgq/EJBBoSssUqOauXWKpsh4wgPdTlZHEVllLtphiuIzFM4UEHQ==
+  /get-stream/5.1.0:
+    dependencies:
+      pump: 3.0.0
+    dev: false
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-EXr1FOzrzTfGeL0gQdeFEvOMm2mzMOglyiOXSTpPC+iAjAKftbr3jpCMWynogwYnM+eSj9sHGc6wjIcDvYiygw==
   /get-value/2.0.6:
     dev: false
     engines:
@@ -2234,11 +2234,6 @@ packages:
     optional: true
     resolution:
       integrity: sha512-+IW9pACdk3XWmmTXG8m3upGUJst5XRGzxMRjXzAuJ1XnIFNvfhjjIuYkDvysnPQ7qzqVzLt78BCruntqRhWQbA==
-  /opusscript/0.0.7:
-    dev: false
-    optional: true
-    resolution:
-      integrity: sha512-DcBadTdYTUuH9zQtepsLjQn4Ll6rs3dmeFvN+SD0ThPnxRBRm/WC1zXWPg+wgAJimB784gdZvUMA57gDP7FdVg==
   /os-homedir/1.0.2:
     dev: false
     engines:
@@ -2656,14 +2651,6 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-MsvtOrfG9ZcrOwAW+Qi+F6HbD0CWXEh9ou77uOb7FM2WPhwT7smM833PzanhJLsgXjN89Ir6V2PczXNnMpwKhw==
-  /rethinkdb/2.4.2:
-    dependencies:
-      bluebird: 2.11.0
-    dev: false
-    engines:
-      node: '>= 0.10.0'
-    resolution:
-      integrity: sha512-6DzwqEpFc8cqesAdo07a845oBRxLiHvWzopTKBo/uY2ypGWIsJQFJk3wjRDtSEhczxJqLS0jnf37rwgzYAw8NQ==
   /rimraf/2.7.1:
     dependencies:
       glob: 7.1.6
@@ -3056,6 +3043,13 @@ packages:
     dev: false
     resolution:
       integrity: sha1-ZnizL6DKIY/laZgbvYhxtZQGDYE=
+  /through2/2.0.5:
+    dependencies:
+      readable-stream: 2.3.7
+      xtend: 4.0.2
+    dev: false
+    resolution:
+      integrity: sha512-/mrRod8xqpA+IHSLyGCQ2s8SPHiCDEeQJSep1jqLYeEUClOFG2Qsh+4FU6G9VeqpZnGW/Su8LQGc4YKni5rYSQ==
   /timm/1.6.2:
     dev: false
     resolution:
@@ -3236,6 +3230,21 @@ packages:
     dev: false
     resolution:
       integrity: sha512-QGkOQc8XL6Bt5PwnsExKBPuMKBxnGxWWW3fU55Xt4feHozMUhdUMaBCk290qpm/wG5u/RSKzwdAC4i51YigihA==
+  /word-list/2.0.0:
+    dev: false
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha1-VN36Sq4fqnF3LPtukgjE2PmZNj4=
+  /word-stream/2.0.0:
+    dependencies:
+      binary-split: 1.0.5
+      word-list: 2.0.0
+    dev: false
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha1-mMEL6N3dLtir3/vSNfjSA56i8Jo=
   /word-wrap/1.2.3:
     dev: false
     engines:
@@ -3253,15 +3262,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-GIyAXC2cB7LjvpgMt9EKS2ldqr0MTrORaleiOno6TweZ6r3TKtoFQWay/2PceJ3RuBasOHzXNn5Lrw1X0bEjqA==
-  /ws/7.2.3:
-    dev: false
-    engines:
-      node: '>=8.3.0'
-    peerDependencies:
-      bufferutil: ^4.0.1
-      utf-8-validate: ^5.0.2
-    resolution:
-      integrity: sha512-HTDl9G9hbkNDk98naoR/cHDws7+EyYMOdL1BmjsZXRUjf7d+MficC4B7HLUPlSiho0vg+CWKrGIt/VJBd1xunQ==
   /xhr/2.5.0:
     dependencies:
       global: 4.3.2
@@ -3319,13 +3319,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-LnBZxCuCof0bwFNtLSxklLYgaU1XR8OK+cGieWyPS10rn3P0TMHdIikRpO/W/duE9SR9JfzOk8ThgwDgx0B3Vw==
-  /ytdl-core/0.7.24:
-    dependencies:
-      html-entities: 1.2.1
-      sax: 1.2.4
-    dev: false
-    resolution:
-      integrity: sha1-RGVpvu/wm0thlfd+sQRDqEuZF7k=
   /ytdl-core/2.0.0:
     dependencies:
       html-entities: 1.2.1
@@ -3341,19 +3334,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-o97wa6XjmuZEhQu0yirUEStIVek=
-  github.com/abalabahaha/Eris/fce520513053eb1f4466130d8075126cf21024fc:
-    dependencies:
-      ws: 7.2.3
-    dev: false
-    engines:
-      node: '>=8.0.0'
-    name: eris
-    optionalDependencies:
-      opusscript: 0.0.7
-      tweetnacl: 1.0.3
-    resolution:
-      tarball: 'https://codeload.github.com/abalabahaha/Eris/tar.gz/fce520513053eb1f4466130d8075126cf21024fc'
-    version: 0.11.2
 registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
@@ -3368,7 +3348,6 @@ specifiers:
   countdown: ^2.6.0
   dateformat: ^3.0.3
   discord.js: ^11.5.1
-  discordstreamer: ^1.0.0
   enmap: ^5.2.4
   express: ^4.17.1
   figlet: ^1.2.4
@@ -3377,6 +3356,7 @@ specifiers:
   fs: 0.0.2
   fs-nextra: ^0.4.7
   get-json: ^1.0.1
+  get-stream: ^5.1.0
   get-youtube-id: ^1.0.1
   gm: ^1.23.1
   guild: ^1.2.2
@@ -3409,5 +3389,6 @@ specifiers:
   to-time: ^1.0.2
   unirest: ^0.6.0
   wget-improved: ^3.0.2
+  word-stream: ^2.0.0
   youtube-info: ^1.3.2
   ytdl-core: ^2.0.0

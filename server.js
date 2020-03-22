@@ -219,44 +219,11 @@ client.on("message", message => {
      }
 });
 
-async function playMusic(message) {
-    guild[message.guild.id].voiceChannel = message.member.voiceChannel;
-    guild[message.guild.id].voiceChannel.join().then(function(connection) {
-        guild[message.guild.id].dispatcher = connection.playStream(stream, {bitrate: "auto", volume: guild[message.guild.id].volume})
-        guild[message.guild.id].dispatcher.on('end', async function() {
-            guild[message.guild.id].skipReq = 0;
-            guild[message.guild.id].skippers = [];
-           if(guild[message.guild.id].loop === true) return playMusic(guild[message.guild.id].queue[0], message)
-           else                      
-           await guild[message.guild.id].queue.shift();
-           await guild[message.guild.id].queueNames.shift();
-            if (guild[message.guild.id].queue.length === 0) {
-                guild[message.guild.id].queue = [];          
-                guild[message.guild.id].queueNames = [];
-                guild[message.guild.id].isPlaying = false;
-                setTimeout(function() {
-                if(guild[message.guild.id].voiceChannel !== null) return message.channel.send(`**:stop_button: Queue concluded.** Please rate the Me on server Support.`)
-            }, 1000)
-            } else {
-                setTimeout(async function() {
-                    if(!guild[message.guild.id].queueNames || guild[message.guild.id].queueNames[0] == undefined) return;
-                    await playMusic(guild[message.guild.id].queue[0], message);
-                   message.channel.send(`Playing :notes: **\`\`${guild[message.guild.id].queueNames[0]}\`\`** ― Now!`)
-                }, 500);
-            }
-        });
-    });
-}
-
-const getStream = require('get-stream');
-const wordStream = require('word-stream');
+var sec = require('sec');
 client.on("message", message => {
   let args = message.content.split(" ");
-  if(args[0].toLowerCase() === `${prefix}rep`) {  
-
-    getStream.array(wordStream).then(words => {
-                 
-           
-});
-}
+  const mentions = message.mentions.users.first();
+  if(args[0].toLowerCase() === `!!test`) {
+ message.channel.send(ms(sec(dateFormat("HH:MM:ss"))))
+     }
 });

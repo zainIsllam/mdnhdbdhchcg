@@ -167,10 +167,10 @@ let mentions = message.mentions.users.first();
   if (
     args[0].toLowerCase() === `${prefix}daily`
   ) {
-    let cooldown = 8.64e7;
+    let cooldown = 60 * 3600;
     let Daily = time[message.author.id];
     if (Daily !== null && cooldown - (Date.now() - Daily) > 0) {
-      let times = cooldown - (Date.now() - Daily);
+      let times = cooldown - ((Date.now() - 9999) - Daily);
       message.channel.send( `**<:Gennys_hmm:683642941503176705> - ${ message.author.username }, your daily credits refreshes in ${pretty(times, { verbose: true })}.**`);
       fs.writeFile("./time.json", JSON.stringify(time), function(e) {
         if (e) throw e;
@@ -224,6 +224,6 @@ client.on("message", message => {
   let args = message.content.split(" ");
   const mentions = message.mentions.users.first();
   if(args[0].toLowerCase() === `!!test`) {
- message.channel.send(pretty(sec(dateFormat("HH:MM:ss")) * 1000))
+ message.channel.send(Date.now())
      }
 });

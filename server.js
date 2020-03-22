@@ -196,8 +196,8 @@ client.on("message", message => {
        const mentionn = message.mentions.users.first();
      let cooldown = 8.64e7;
     let repi = timess[message.author.id];
-    if (repi !== null && cooldown - (Date.now() - repi) > 0) {
-      let tmes = cooldown - (Date.now() - repi);
+    if (repi !== null && cooldown - (pretty(sec(dateFormat("HH:MM:ss")) * 1000) - repi) > 0) {
+      let tmes = cooldown - (pretty(sec(dateFormat("HH:MM:ss")) * 1000) - repi);
       message.channel.send(
         `**<:Gennys_hmm:683642941503176705> - ${message.author.username}, you can raward more reputation in ${pretty(tmes, {
           verbose: true
@@ -209,7 +209,7 @@ client.on("message", message => {
     } else {
       if(!mentionn) return message.channel.send(`**<:Gennys_Detective:683643216507043892> - ${message.author.username}, The user could not be found.**`);
      if(mentionn.id == message.author.id) return message.channel.send(`<:Gennys_Detective:683643216507043892> - **${message.author.username}, You cant give yourself a reputation !**`);
-      timess[message.author.id] = Date.now();
+      timess[message.author.id] = pretty(sec(dateFormat("HH:MM:ss")) * 1000);
       rep[mentionn.id].rep += Math.floor(+1);
          message.channel.send(`** :up:  |  ${message.author.username} has given ${mentionn} a reputation point!**`)
    fs.writeFile("./rep.json", JSON.stringify(rep), function(e) {
@@ -224,6 +224,6 @@ client.on("message", message => {
   let args = message.content.split(" ");
   const mentions = message.mentions.users.first();
   if(args[0].toLowerCase() === `!!test`) {
- message.channel.send(ms(sec(dateFormat("HH:MM:ss"))))
+ message.channel.send(pretty(sec(dateFormat("HH:MM:ss")) * 1000))
      }
 });

@@ -160,17 +160,17 @@ let mentions = message.mentions.users.first();
     const mentionn = message.mentions.users.first();
     if (!args[2] && !mentionn) {
       message.channel.send(
-        `**:bank: | ${mention.username}, Your :credit_card: balance is \`$${credits[mention.id].credits}\`**`
+        `**:bank: | ${mention.username}, Your account balance is \`$${credits[mention.id].credits}\`**`
       );
     }
    else if (!args[2] && mentionn) {
-      message.channel.send(
-        `** ${mention.username}, :credit_card: balance is \`$${credits[mention.id].credits}\`**`
-      );
      if (mentionn.bot) return
       message.channel.send(
         `**:thinking:  |  ${message.author.username}**, bots do not have credits!`
-      )
+      );
+      message.channel.send(
+        `** ${mention.username}, :credit_card: balance is \`$${credits[mention.id].credits}\`**`
+      );
     } else if (mentionn && args[2]) {
       if (isNaN(args[2]))
         return message.channel.send(

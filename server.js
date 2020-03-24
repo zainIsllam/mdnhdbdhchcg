@@ -51,7 +51,7 @@ client.on("ready", function() {
     client.user.setGame("#help");
 });
 
-const speed = [
+const cptcha = [
     {
             "type": "https://cdn.discordapp.com/attachments/634854460102803456/692002715672379413/captcha.png",
         "answers": ["9340"]
@@ -193,14 +193,8 @@ let mentions = message.mentions.users.first();
           `**:interrobang: - ${message.author.username}, type the credit you need to transfer!**`
         );
       let tax = Math.floor(args[2] * (5 / 100));
-      let first = Math.floor(Math.random() * 10);
-      let second = Math.floor(Math.random() * 10);
-      let third = Math.floor(Math.random() * 10);
-      let fourth = Math.floor(Math.random() * 10);
-      let num = `${first}${second}${third}${fourth}`;
       let Price = message.content.split(" ")[2];
       let resulting = Math.floor(Price - Price * (5 / 100));
-
       message.delete();
       message.channel
         .send(
@@ -208,34 +202,31 @@ let mentions = message.mentions.users.first();
    type these numbers to confirm : `
         )
         .then(m => {
-        const item = speed[Math.floor(Math.random() * speed.length)];
+        const capa = cptcha[Math.floor(Math.random() * cptcha.length)];
 const filter = response => {  
-    return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
+    return capa.answers.some(ansr => cptcha.toLowerCase() === response.content.toLowerCase());
 };
 
-          message.channel.sendFile(item.type).then(s => {
+          message.channel.sendFile(capa.type).then(s => {
         message.channel.awaitMessages(filter, { maxMatches: 1, time: 15000, errors: ['time'] })
         .then((collected) => {
                   message.channel.send(
                     `**:moneybag: - ${message.author.username}, has transferred \`$${resulting}\` to ${mentionn}**`
                   );
-                  m.delete();
-                  s.delete();
                   mention.send(
                     `**:atm: | Transfer Receipt**\`\`\`You Have Received \$${resulting}\ From User ${message.author.username}; (ID ${message.author.id})\`\`\``
                   );
-                  m.delete();
-                  s.delete();
-
                   credits[author].credits += Math.floor(-args[2]);
                   credits[mentionn.id].credits += Math.floor(+resulting);
                   fs.writeFileSync(
                     "./credits.json",
                     JSON.stringify(credits, null, 4)
-                  );
-                })
-              });
-          });
+                );
+        collected.delete();       
+        })
+          s.delete();
+        })
+      });
     }
   }
  

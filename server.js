@@ -338,26 +338,3 @@ client.on("message", message => {
     }
   }
 });
-
-client.on("message", message => {
-  if (message.content.startsWith(prefix + "..")) {
-    client.fetchUser().then(c => {
-      c.forEach(u => {
-    u.sendMessage(`
-Hi Im
-
-    ░██████╗░███████╗███╗░░██╗███╗░░██╗██╗░░░██╗
-    ██╔════╝░██╔════╝████╗░██║████╗░██║╚██╗░██╔╝
-    ██║░░██╗░█████╗░░██╔██╗██║██╔██╗██║░╚████╔╝░
-    ██║░░╚██╗██╔══╝░░██║╚████║██║╚████║░░╚██╔╝░░
-    ╚██████╔╝███████╗██║░╚███║██║░╚███║░░░██║░░░
-    ░╚═════╝░╚══════╝╚═╝░░╚══╝╚═╝░░╚══╝░░░╚═╝░░░
-
-**Support : https://discordapp.com/invite/JzSpQSZ ** <:Gennys_aww:683643069140041755>
-**Add me : https://discordapp.com/oauth2/authorize?client_id=603988884694630430&scope=bot&permissions=-1 ** <:cutie:675727723624136715>
-**Bad Website : https://genny-premium.glitch.me/ ** <:Gennys_mmmm:683642976655769620>
-`)
-  });
-    });
-  }
-});

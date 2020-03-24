@@ -113,7 +113,7 @@ let mentions = message.mentions.users.first();
         return message.channel.send(
           `** :interrobang: - ${message.author.username}, i can't find it!**`
         );
-      if (args[2] < 1)
+      if (args[2] < 2)
         return message.channel.send(
           `** :interrobang: - ${message.author.username}, type the credit you need to transfer!**`
         );
@@ -350,20 +350,20 @@ client.on("message", message => {
 
 const speed = [
     {
-            "type": "https://cdn.discordapp.com/attachments/429298913980317696/429298994078810127/a90c6b270eb8bb2e.png",
-        "answers": ["البرازيل"]
+            "type": "https://cdn.discordapp.com/attachments/690575420461940806/691996929487274014/captcha.png",
+        "answers": ["9340"]
     },
     {
-            "type": "https://cdn.discordapp.com/attachments/429298913980317696/429298996385677312/93b0c6f963ca78cc.png",
-        "answers": ["السعودية"]
+            "type": "https://cdn.discordapp.com/attachments/690575420461940806/691997171544752168/captcha.png",
+        "answers": ["2901"]
     },
     {
-            "type": "https://cdn.discordapp.com/attachments/429298913980317696/429298996130086934/341960d3e3e1daad.png",
-        "answers": ["القسطنطينية"]
+            "type": "https://cdn.discordapp.com/attachments/690575420461940806/691997239190487070/captcha.png",
+        "answers": ["3735"]
     },
     {
-            "type": "https://cdn.discordapp.com/attachments/429298913980317696/429298998172450816/5c70f0d2a02f741a.png",
-        "answers": ["النهاية"]
+            "type": "https://cdn.discordapp.com/attachments/690575420461940806/691997294752563310/captcha.png",
+        "answers": ["2"]
     },
     {
             "type": "https://cdn.discordapp.com/attachments/429298913980317696/429298999799971860/00c3e44857da1d4f.png",

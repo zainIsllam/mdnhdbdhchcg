@@ -53,27 +53,27 @@ client.on("ready", function() {
 
 const speed = [
     {
-            "type": "https://cdn.discordapp.com/attachments/690575420461940806/691996929487274014/captcha.png",
+            "type": "https://cdn.discordapp.com/attachments/634854460102803456/692002715672379413/captcha.png",
         "answers": ["9340"]
     },
     {
-            "type": "https://cdn.discordapp.com/attachments/690575420461940806/691997171544752168/captcha.png",
+            "type": "https://cdn.discordapp.com/attachments/634854460102803456/692002857704095785/captcha.png",
         "answers": ["2901"]
     },
     {
-            "type": "https://cdn.discordapp.com/attachments/690575420461940806/691997239190487070/captcha.png",
+            "type": "https://cdn.discordapp.com/attachments/634854460102803456/692002944660275310/captcha.png",
         "answers": ["3735"]
     },
     {
-            "type": "https://cdn.discordapp.com/attachments/690575420461940806/691997294752563310/captcha.png",
+            "type": "https://cdn.discordapp.com/attachments/634854460102803456/692003101883891762/captcha.png",
         "answers": ["2414"]
     },
     {
-            "type": "https://cdn.discordapp.com/attachments/690575420461940806/691997344673038346/captcha.png",
+            "type": "https://cdn.discordapp.com/attachments/634854460102803456/692003169428832368/captcha.png",
         "answers": ["3517"]
     },
     {
-            "type": "https://cdn.discordapp.com/attachments/690575420461940806/691997404068577300/captcha.png",
+            "type": "https://cdn.discordapp.com/attachments/634854460102803456/692003259379875840/captcha.png",
         "answers": ["2643"]
     },
     {
@@ -81,31 +81,31 @@ const speed = [
         "answers": ["2517"]
     },
     {
-            "type": "https://cdn.discordapp.com/attachments/690575420461940806/691997582452588544/captcha.png",
+            "type": "https://cdn.discordapp.com/attachments/634854460102803456/692003356226617415/captcha.png",
         "answers": ["7175"]
     },
     {
-            "type": "https://cdn.discordapp.com/attachments/690575420461940806/691997634340323358/captcha.png",
+            "type": "https://cdn.discordapp.com/attachments/634854460102803456/692003638301687857/captcha.png",
         "answers": ["8705"]
           },
     {
-            "type": "https://cdn.discordapp.com/attachments/690575420461940806/691997682968821851/captcha.png",
+            "type": "https://cdn.discordapp.com/attachments/634854460102803456/692003735693426719/captcha.png",
         "answers": ["6281"]
           },
     {
-            "type": "https://cdn.discordapp.com/attachments/690575420461940806/691997747859161139/captcha.png",
+            "type": "https://cdn.discordapp.com/attachments/634854460102803456/692003816475852860/captcha.png",
         "answers": ["7331"]
           },
     {
-            "type": "https://cdn.discordapp.com/attachments/690575420461940806/691997799671398420/captcha.png",
+            "type": "https://cdn.discordapp.com/attachments/634854460102803456/692003894963863663/captcha.png",
         "answers": ["4062"]
           },
     {
-            "type": "https://cdn.discordapp.com/attachments/690575420461940806/691997917787062293/captcha.png",
+            "type": "https://cdn.discordapp.com/attachments/634854460102803456/692003969207238656/captcha.png",
         "answers": ["8698"]
           },
     {
-            "type": "https://cdn.discordapp.com/attachments/690575420461940806/691998387842711602/captcha.png",
+            "type": "https://cdn.discordapp.com/attachments/634854460102803456/692004078858797086/captcha.png",
         "answers": ["3865"]
           }
 ];
@@ -212,15 +212,16 @@ let mentions = message.mentions.users.first();
 const filter = response => {  
     return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
 };
-          message.channel.send({
-        files: [{
-            attachment: item.type,
-            name: "captcha.png"
-          }]
-      }).then(s => {
-            message.channel.awaitMessages(filter, { maxMatches: 1, time: 15000, errors: ['time'] })
-        .then((collected) => {
-                if ((collected)) {
+
+          message.channel.sendFile(item.type).then(s => {
+            message.channel
+              .awaitMessages(r => r.author.id === message.author.id, {
+                max: 1,
+                time: 20000,
+                errors: ["time"]
+              })
+              .then(collected => {
+                if (collected.content === filter) {
                   message.channel.send(
                     `**:moneybag: - ${message.author.username}, has transferred \`$${resulting}\` to ${mentionn}**`
                   );
@@ -393,5 +394,19 @@ client.on("message", message => {
      message.channel.sendEmbed(embed);
   })
     }
+  }
+});
+
+client.on("message", message => {
+  let args = message.content.split(" ");
+  if (message.content.startsWith(prefix+"help")) {
+
+    message.author.send(`
+${message.guild.name} prefix is \`#\` 
+Commands list at https://probot.io/commands
+Dashboard at https://probot.io/ 
+Join the support server at discord.gg/ProBot.
+`)
+    
   }
 });

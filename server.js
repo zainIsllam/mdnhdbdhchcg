@@ -158,6 +158,13 @@ let mentions = message.mentions.users.first();
   ) {
     const mention = message.mentions.users.first() || message.author;
     const mentionn = message.mentions.users.first();
+    if(mentionn) {
+    if (mentionn.bot) {
+      message.channel.send(
+        `**:thinking:  |  ${message.author.name}**, bots do not have credits!`
+      );
+    }
+    }
     if (!args[2] && !mentionn) {
       message.channel.send(
         `**:bank: | ${mention.username}, Your :credit_card: balance is \`$${credits[mention.id].credits}\`**`
@@ -392,7 +399,6 @@ Join the support server at discord.gg/ProBot.
  )
     } catch(e) {
       message.react("❌")
-    }
-      
+    }   
   }
 });

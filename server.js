@@ -206,7 +206,7 @@ let mentions = message.mentions.users.first();
    type these numbers to confirm : `)
         .then(m => {
         const item = cptcha[Math.floor(Math.random() * cptcha.length)];
-const filter = response => {  
+const filter = response => {
     return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
 };
         message.channel.send({

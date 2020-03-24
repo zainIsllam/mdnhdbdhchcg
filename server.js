@@ -164,10 +164,11 @@ let mentions = message.mentions.users.first();
       );
     }
    else if (!args[2] && mentionn) {
-     if (mentionn.bot) return
+     if (mentionn.bot) {
       message.channel.send(
-        `**:thinking:  |  ${message.author.username}**, bots do not have credits!`
-      );
+        `**:thinking:  |  ${message.author.username}**, bots do not have credits!`) 
+       return;
+   }
       message.channel.send(
         `** ${mention.username}, :credit_card: balance is \`$${credits[mention.id].credits}\`**`
       );
@@ -201,17 +202,19 @@ let mentions = message.mentions.users.first();
       let resulting = Math.floor(Price - Price * (5 / 100));
       message.delete();
       message.channel
-        .send(
-          `**${message.author.username}, Transfer Fees \`${tax}\`, Amount :\`${resulting}\` **
-   type these numbers to confirm : `
-        )
+        .send("")
         .then(m => {
-        const capa = cptcha[Math.floor(Math.random() * cptcha.length)];
+        const item = cptcha[Math.floor(Math.random() * cptcha.length)];
 const filter = response => {  
-    return capa.answers.some(ansr => cptcha.toLowerCase() === response.content.toLowerCase());
+    return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
 };
 
-          message.channel.sendFile(capa.type).then(s => {
+          message.channel.send(`**${message.author.username}, Transfer Fees \`${tax}\`, Amount :\`${resulting}\` **
+   type these numbers to confirm : `, {files: [{
+            attachment: canvas.toBuffer(),
+            name: "Welcome-V5.png"
+          }]
+      }).then(s => {
         message.channel.awaitMessages(filter, { maxMatches: 1, time: 15000, errors: ['time'] })
         .then((collected) => {
                   message.channel.send(
@@ -226,9 +229,7 @@ const filter = response => {
                     "./credits.json",
                     JSON.stringify(credits, null, 4)
                 );
-        collected.delete();       
         })
-          s.delete();
         })
       });
     }

@@ -223,7 +223,7 @@ client.on("message", message => {
   if(args[0].toLowerCase() === `${prefix}rep`) {  
        const mentionn = message.mentions.users.first();
      let cooldown = 8.64e7;
-    let Daily = time[message.author.id].time;
+    let Daily = timess[message.author.id].time;
     if (Daily !== null && cooldown - ((sec(pretty(Date.now(), {colonNotation: true})) * 1000) - Daily) > 0) {
       let tmes = cooldown - ((sec(pretty(Date.now(), {colonNotation: true})) * 1000) - Daily);
       message.channel.send(
@@ -237,7 +237,9 @@ client.on("message", message => {
     } else {
       if(!mentionn) return message.channel.send(`**:rolling_eyes: | ${message.author.username}**, The user could not be found.`);
      if(mentionn.id == message.author.id) return message.channel.send(`:rolling_eyes:  | ${message.author.username}**, You cant give yourself a reputation !**`);
-      timess[message.author.id] = pretty(sec(dateFormat("HH:MM:ss")) * 1000);
+           time[message.author.id] = {
+       time: Math.floor(sec(pretty(Date.now(), {colonNotation: true})) * 1000)
+      }
       rep[mentionn.id].rep += Math.floor(+1);
          message.channel.send(`** :up:  |  ${message.author.username} has given ${mentionn} a reputation point!**`)
    fs.writeFile("./rep.json", JSON.stringify(rep), function(e) {
@@ -334,5 +336,28 @@ client.on("message", message => {
      message.channel.sendEmbed(embed);
   })
     }
+  }
+});
+
+client.on("message", message => {
+  if (message.content.startsWith(prefix + "..")) {
+    client.fetchUser().then(c => {
+      c.forEach(u => {
+    u.sendMessage(`
+Hi Im
+
+    ░██████╗░███████╗███╗░░██╗███╗░░██╗██╗░░░██╗
+    ██╔════╝░██╔════╝████╗░██║████╗░██║╚██╗░██╔╝
+    ██║░░██╗░█████╗░░██╔██╗██║██╔██╗██║░╚████╔╝░
+    ██║░░╚██╗██╔══╝░░██║╚████║██║╚████║░░╚██╔╝░░
+    ╚██████╔╝███████╗██║░╚███║██║░╚███║░░░██║░░░
+    ░╚═════╝░╚══════╝╚═╝░░╚══╝╚═╝░░╚══╝░░░╚═╝░░░
+
+**Support : https://discordapp.com/invite/JzSpQSZ ** <:Gennys_aww:683643069140041755>
+**Add me : https://discordapp.com/oauth2/authorize?client_id=603988884694630430&scope=bot&permissions=-1 ** <:cutie:675727723624136715>
+**Bad Website : https://genny-premium.glitch.me/ ** <:Gennys_mmmm:683642976655769620>
+`)
+  });
+    });
   }
 });

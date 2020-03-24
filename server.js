@@ -237,7 +237,7 @@ client.on("message", message => {
     } else {
       if(!mentionn) return message.channel.send(`**:rolling_eyes: | ${message.author.username}**, The user could not be found.`);
      if(mentionn.id == message.author.id) return message.channel.send(`:rolling_eyes:  | ${message.author.username}**, You cant give yourself a reputation !**`);
-           time[message.author.id] = {
+           timess[message.author.id] = {
        time: Math.floor(sec(pretty(Date.now(), {colonNotation: true})) * 1000)
       }
       rep[mentionn.id].rep += Math.floor(+1);

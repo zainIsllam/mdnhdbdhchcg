@@ -202,17 +202,17 @@ let mentions = message.mentions.users.first();
       let resulting = Math.floor(Price - Price * (5 / 100));
       message.delete();
       message.channel
-        .send("")
+        .send(`**${message.author.username}, Transfer Fees \`${tax}\`, Amount :\`${resulting}\` **
+   type these numbers to confirm : `)
         .then(m => {
         const item = cptcha[Math.floor(Math.random() * cptcha.length)];
 const filter = response => {  
     return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
 };
-
-          message.channel.send(`**${message.author.username}, Transfer Fees \`${tax}\`, Amount :\`${resulting}\` **
-   type these numbers to confirm : `, {files: [{
-            attachment: canvas.toBuffer(),
-            name: "Welcome-V5.png"
+        message.channel.send({
+            files: [{
+            attachment: item.type,
+            name: "capatcha.png"
           }]
       }).then(s => {
         message.channel.awaitMessages(filter, { maxMatches: 1, time: 15000, errors: ['time'] })
@@ -398,5 +398,18 @@ Join the support server at discord.gg/ProBot.
     } catch(e) {
       message.react("❌")
     }   
+  }
+});
+
+client.on("message", message => {
+  if (message.content.startsWith(prefix + "ping")) {
+    message.channel.send("Pong...").then(msg => {
+      msg.edit(
+          `\`\`\`javascript\nTime taken: ${msg.createdTimestamp -
+            message.createdTimestamp} ms.\nDiscord API: ${Math.round(
+            client.ping
+          )} ms.\`\`\``
+      );
+    });
   }
 });

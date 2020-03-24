@@ -214,14 +214,8 @@ const filter = response => {
 };
 
           message.channel.sendFile(item.type).then(s => {
-            message.channel
-              .awaitMessages(r => r.author.id === message.author.id, {
-                max: 1,
-                time: 20000,
-                errors: ["time"]
-              })
-              .then(collected => {
-                if (collected.content === filter) {
+        message.channel.awaitMessages(filter, { maxMatches: 1, time: 15000, errors: ['time'] })
+        .then((collected) => {
                   message.channel.send(
                     `**:moneybag: - ${message.author.username}, has transferred \`$${resulting}\` to ${mentionn}**`
                   );
@@ -239,12 +233,9 @@ const filter = response => {
                     "./credits.json",
                     JSON.stringify(credits, null, 4)
                   );
-                } else {
-                  m.delete();
-                }
+                })
               });
           });
-        });
     }
   }
  
@@ -397,16 +388,20 @@ client.on("message", message => {
   }
 });
 
-client.on("message", message => {
+client.on("message", async message => {
   let args = message.content.split(" ");
   if (message.content.startsWith(prefix+"help")) {
-
+try {
     message.author.send(`
-${message.guild.name} prefix is \`#\` 
+**${message.guild.name}** prefix is \`#\` 
 Commands list at https://probot.io/commands
 Dashboard at https://probot.io/ 
 Join the support server at discord.gg/ProBot.
-`)
-    
+`).then(m => m.react("✅")
+ )
+    } catch(e) {
+      message.react("❌")
+    }
+      
   }
 });

@@ -347,20 +347,8 @@ client.on("message", message => {
 
 client.on("message", message => {
   let args = message.content.split(" ");
-    if (args[0].toLowerCase() === `${prefix}avatar`) {
+ if (args[0].toLowerCase() === `${prefix}avatar`) {
   let member = message.mentions.users.first();
-        const embed = new Discord.RichEmbed()
-      .setAuthor(message.guild.name, message.guild.iconURL())
-      .setColor("#51545b")
-      .setTitle("Avatar Link")
-      .setURL(`${message.guild.iconURL()}`)
-      .setImage(`${message.guild.iconURL()}`)
-      .setFooter("Requested by" + message.author.tag, message.author.avatarURL);
-     message.channel.sendEmbed(embed);
-      
-  } else if (args[0].toLowerCase() === `${prefix}avatar`) {
-  let member = message.mentions.users.first();
-
   if(args[0] && !args[1]) {
         const embed = new Discord.RichEmbed()
       .setAuthor(message.author.tag, message.author.avatarURL)

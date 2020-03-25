@@ -352,22 +352,20 @@ client.on("message", message => {
  if (args[0].toLowerCase() === `${prefix}avatar`) {
   let member = message.mentions.users.first();
   if(args[0] && !args[1]) {
-        const embed = new Discord.RichEmbed()
-      .setAuthor(message.author.tag, message.author.avatarURL)
+     message.channel.sendEmbed(new Discord.RichEmbed().setAuthor(message.author.tag, message.author.avatarURL)
       .setColor("#51545b")
       .setTitle("Avatar Link")
-      .setURL(`${message.author.avatarURL}`)
-      .setImage(`${message.author.avatarURL}`)
-      .setFooter("Requested by" + message.author.tag, message.author.avatarURL);
-     message.channel.sendEmbed(embed);
+      .setURL(`${message.author.avatarURL({ size: 1024})}`)
+      .setImage(`${message.author.avatarURL({ size: 1024})}`)
+      .setFooter("Requested by" + message.author.tag, message.author.avatarURL));
   }
   if(member) {
       const embed = new Discord.RichEmbed()
       .setAuthor(member.tag, member.avatarURL)
       .setColor("#51545b")
       .setTitle("Avatar Link")
-      .setURL(`${member.avatarURL}`)
-      .setImage(`${member.avatarURL}`)
+      .setURL(`${member.avatarURL({ size: 1024})}`)
+      .setImage(`${member.avatarURL({ size: 1024})}`)
       .setFooter("Requested by" + message.author.tag, message.author.avatarURL);
      message.channel.sendEmbed(embed);
      }else if(args[1] && !member) {
@@ -376,8 +374,8 @@ client.on("message", message => {
       .setAuthor(user.tag, user.avatarURL)
       .setColor("#51545b")
       .setTitle("Avatar Link")
-      .setURL(`${user.avatarURL}`)
-      .setImage(`${user.avatarURL}`)
+      .setURL(`${user.avatarURL({ size: 1024})}`)
+      .setImage(`${user.avatarURL({ size: 1024})}`)
       .setFooter("Requested by" + message.author.tag, message.author.avatarURL);
      message.channel.sendEmbed(embed);
   })
@@ -414,86 +412,3 @@ client.on("message", message => {
     });
   }
 });
-
-const config = require('./config.json');
-
-const size    = config.colors;
-const rainbow = new Array(size);
-
-for (var i=0; i<size; i++) {
-  var red   = sin_to_hex(i, 0 * Math.PI * 2/3); // 0   deg
-  var blue  = sin_to_hex(i, 1 * Math.PI * 2/3); // 120 deg
-  var green = sin_to_hex(i, 2 * Math.PI * 2/3); // 240 deg
-
-  rainbow[i] = '#'+ red + green + blue;
-}
-
-function sin_to_hex(i, phase) {
-  var sin = Math.sin(Math.PI / size * 2 * i + phase);
-  var int = Math.floor(sin * 127) + 128;
-  var hex = int.toString(16);
-
-  return hex.length === 1 ? '0'+hex : hex;
-}
-
-let place = 0;
-const servers = config.servers;
-
-function changeColor() {
-  for (let index = 0; index < servers.length; ++index) {		
-    client.guilds.get(servers[index]).roles.find('name', config.roleName).setColor(rainbow[place])
-		.catch(console.error);
-		
-    if(config.logging){
-      console.log(`[ColorChanger] Changed color to ${rainbow[place]} in server: ${servers[index]}`);
-    }
-    if(place == (size - 1)){
-      place = 0;
-    }else{
-      place++;
-    }
-  }
-}
-
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.username}!`);
-  setInterval(changeColor, config.speed);
-});
-
-client.on("message", message => {
-  if (message.content.startsWith(".")) {
-let user = message.mentions.members.first();
-  setInterval(function(m) {
-setTimeout(function() {
-message.guild.member(user.user).setNickname("C")
-}, 1000)
-setTimeout(function() {
-message.guild.member(user.user).setNickname("Cu")
-}, 2000)
-setTimeout(function() {     
-message.guild.member(user.user).setNickname("CutᎥ")
-}, 3000)
-setTimeout(function() {
-message.guild.member(user.user).setNickname("CutᎥe")
-}, 4000)
-    setTimeout(function() {
-message.guild.member(user.user).setNickname("CutᎥe Ƥ")
-}, 5000)
-    setTimeout(function() {
-message.guild.member(user.user).setNickname("CutᎥe ƤᎥ")
-}, 6000)
-    setTimeout(function() {
-message.guild.member(user.user).setNickname("CutᎥe ƤᎥe")
-}, 7000)
-    setTimeout(function() {
-message.guild.member(user.user).setNickname("CutᎥe ƤᎥe -")
-}, 8000)
-    setTimeout(function() {
-message.guild.member(user.user).setNickname("CutᎥe ƤᎥe -ﾒ")
-}, 9000)
-}, 10000)
-message.channel.send("OK")
-}
-});
-
-client.login(config.token);

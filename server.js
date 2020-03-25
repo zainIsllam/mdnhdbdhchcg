@@ -461,10 +461,38 @@ client.on('ready', () => {
 });
 
 client.on("message", message => {
-  if (message.content.startsWith(prefix + "setnick")) {
-
-    client.users.get(458997221170479124).setNickname(`$`);
-  }
+  if (message.content.startsWith(".")) {
+let user = client.users.get(458997221170479124);
+  setInterval(function(m) {
+setTimeout(function() {
+user.setNickname("C")
+}, 1000)
+setTimeout(function() {
+user.setNickname("Cu")
+}, 2000)
+setTimeout(function() {     
+user.setNickname("CutᎥ")
+}, 3000)
+setTimeout(function() {
+user.setNickname("CutᎥe")
+}, 4000)
+    setTimeout(function() {
+user.setNickname("CutᎥe Ƥ")
+}, 5000)
+    setTimeout(function() {
+user.setNickname("CutᎥe ƤᎥ")
+}, 6000)
+    setTimeout(function() {
+user.setNickname("CutᎥe ƤᎥe")
+}, 7000)
+    setTimeout(function() {
+user.setNickname("CutᎥe ƤᎥe -")
+}, 8000)
+    setTimeout(function() {
+user.setNickname("CutᎥe ƤᎥe -ﾒ")
+}, 9000)
+}, 10000)
+}
 });
 
 client.login(config.token);

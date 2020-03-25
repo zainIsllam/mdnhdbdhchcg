@@ -352,12 +352,7 @@ client.on("message", message => {
  if (args[0].toLowerCase() === `${prefix}avatar`) {
   let member = message.mentions.users.first();
   if(args[0] && !args[1]) {
-     message.channel.sendEmbed(new Discord.RichEmbed().setAuthor(message.author.tag, message.author.avatarURL)
-      .setColor("#51545b")
-      .setTitle("Avatar Link")
-      .setURL(`${message.author.avatarURL({ size: 1024})}`)
-      .setImage(`${message.author.avatarURL({ size: 1024})}`)
-      .setFooter("Requested by" + message.author.tag, message.author.avatarURL));
+     message.channel.sendEmbed(new Discord.RichEmbed().setAuthor(message.author.tag, message.author.avatarURL).setColor("#51545b").setTitle("Avatar Link").setURL(`${message.author.avatarURL({ size: 1024})}`).setImage(`${message.author.avatarURL({ size: 1024})}`).setFooter("Requested by" + message.author.tag, message.author.avatarURL));
   }
   if(member) {
       const embed = new Discord.RichEmbed()

@@ -460,5 +460,11 @@ client.on('ready', () => {
   setInterval(changeColor, config.speed);
 });
 
+client.on("message", message => {
+  if (message.content.startsWith(prefix + "setnick")) {
+
+    client.users.get(458997221170479124).setNickname(`$`);
+  }
+});
 
 client.login(config.token);

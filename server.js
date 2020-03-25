@@ -415,9 +415,8 @@ client.on("message", message => {
   }
 });
 
-var logo = require('logo');
 client.on("message", message => {
   if (message.content.startsWith(prefix + "test")) {
-fs.createReadStream('aWholeCatLoadOfLogo.txt').pipe(logo.stream).pipe(process.stdout)
+
   }
 });

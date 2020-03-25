@@ -229,6 +229,8 @@ const filter = response => {
                     "./credits.json",
                     JSON.stringify(credits, null, 4)
                 );
+          s.delete();
+        m.delete();
         })
         })
       });

@@ -352,15 +352,22 @@ client.on("message", message => {
  if (args[0].toLowerCase() === `${prefix}avatar`) {
   let member = message.mentions.users.first();
   if(args[0] && !args[1]) {
-     message.channel.sendEmbed(new Discord.RichEmbed().setAuthor(message.author.tag, message.author.avatarURL).setColor("#51545b").setTitle("Avatar Link").setURL(`${message.author.avatarURL({ size: 1024})}`).setImage(`${message.author.avatarURL({ size: 1024})}`).setFooter("Requested by" + message.author.tag, message.author.avatarURL));
+    const emb = new Discord.RichEmbed()
+    .setAuthor(message.author.tag, message.author.avatarURL)
+    .setColor("#51545b")
+    .setTitle("Avatar Link")
+    .setURL(`${message.author.avatarURL}`)
+    .setImage(`${message.author.avatarURL}`)
+.setFooter("Requested by" + message.author.tag, message.author.avatarURL)
+     message.channel.sendEmbed(emb);
   }
   if(member) {
       const embed = new Discord.RichEmbed()
       .setAuthor(member.tag, member.avatarURL)
       .setColor("#51545b")
       .setTitle("Avatar Link")
-      .setURL(`${member.avatarURL({ size: 1024})}`)
-      .setImage(`${member.avatarURL({ size: 1024})}`)
+      .setURL(`${member.avatarURL}`)
+      .setImage(`${member.avatarURL}`)
       .setFooter("Requested by" + message.author.tag, message.author.avatarURL);
      message.channel.sendEmbed(embed);
      }else if(args[1] && !member) {
@@ -369,8 +376,8 @@ client.on("message", message => {
       .setAuthor(user.tag, user.avatarURL)
       .setColor("#51545b")
       .setTitle("Avatar Link")
-      .setURL(`${user.avatarURL({ size: 1024})}`)
-      .setImage(`${user.avatarURL({ size: 1024})}`)
+      .setURL(`${user.avatarURL}`)
+      .setImage(`${user.avatarURL}`)
       .setFooter("Requested by" + message.author.tag, message.author.avatarURL);
      message.channel.sendEmbed(embed);
   })
@@ -405,5 +412,12 @@ client.on("message", message => {
           )} ms.\`\`\``
       );
     });
+  }
+});
+
+var logo = require('logo');
+client.on("message", message => {
+  if (message.content.startsWith(prefix + "test")) {
+fs.createReadStream('aWholeCatLoadOfLogo.txt').pipe(logo.stream).pipe(process.stdout)
   }
 });

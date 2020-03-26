@@ -229,8 +229,9 @@ const filter = response => {
                     "./credits.json",
                     JSON.stringify(credits, null, 4)
                 );
+          
           s.delete();
-        m.delete();
+            m.delete();
         })
         })
       });
@@ -396,7 +397,7 @@ Dashboard at https://probot.io/
 Join the support server at discord.gg/ProBot.
 `).then(m => m.react("✅")
  )
-    } catch(e) {
+  } catch(e) {
       message.react("❌")
     }   
   }

@@ -412,14 +412,14 @@ client.on("message", message => {
 });
 
 client.on("message", message => {
-  if (message.content.startsWith(prefix + "magik")) {
+  if (message.content.startsWith(prefix + "test")) {
     let args = message.content.split(" ").slice(1);
     let member = message.mentions.users.first();
 	  let	user = member;
 
-    message.channel.fetchMessages({ limit: 100 }).then(messages => {
+    message.channel.fetchMessages({ limit: 100 }).then(mes => {
       const options = {
-      url: `https://nekobot.xyz/api/imagegen?type=magik&image=${user.displayAvatarURL}`,
+      url: `https://nekobot.xyz/api/imagegen?type=magik&image=${mes.attachments.first().url}`,
       json: true
     };
     message.channel.startTyping();

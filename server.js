@@ -410,3 +410,51 @@ client.on("message", message => {
 
   }
 });
+
+client.on("message", message => {
+  if (message.content.startsWith(prefix + "magik")) {
+    let args = message.content.split(" ").slice(1);
+    let member = message.mentions.users.first();
+	  let	user = member;
+
+    message.channel.fetchMessages({ limit: 100 }).then(messages => {
+      const options = {
+      url: `https://nekobot.xyz/api/imagegen?type=magik&image=${user.displayAvatarURL}`,
+      json: true
+    };
+    message.channel.startTyping();
+    setTimeout(() => {
+      message.channel.stopTyping();
+    }, Math.random() * (1 - 3) + 1 * 1000);
+    get(options).then(body => {
+      message.channel.send({
+        files: [
+          {
+            name: "magik.png",
+            attachment: body.message
+          }
+        ]
+      });
+    });
+});
+    
+    const options = {
+      url: `https://nekobot.xyz/api/imagegen?type=magik&image=${user.displayAvatarURL}`,
+      json: true
+    };
+    message.channel.startTyping();
+    setTimeout(() => {
+      message.channel.stopTyping();
+    }, Math.random() * (1 - 3) + 1 * 1000);
+    get(options).then(body => {
+      message.channel.send({
+        files: [
+          {
+            name: "magik.png",
+            attachment: body.message
+          }
+        ]
+      });
+    });
+  }
+});

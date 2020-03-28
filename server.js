@@ -378,17 +378,13 @@ client.on("message", message => {
 client.on("message", async message => {
   let args = message.content.split(" ");
   if (message.content.startsWith(prefix+"help")) {
-try {
     message.author.send(`
 **${message.guild.name}** prefix is \`#\` 
 Commands list at https://probot.io/commands
 Dashboard at https://probot.io/ 
 Join the support server at discord.gg/ProBot.
-`).then(m => m.react("✅")
+`).then(m => message.react("✅")
  )
-  } catch(e) {
-      message.react("❌")
-    }   
   }
 });
 
@@ -406,38 +402,17 @@ client.on("message", message => {
 });
 
 client.on("message", message => {
-  if (message.content.startsWith(prefix + "test")) {
-
+  if (message.content.startsWith("مين صنعك")) {
+message.channel.send("CutᎥe ƤᎥe -ﾒ#7204 هو صانعي")
   }
 });
 
 client.on("message", message => {
-  if (message.content.startsWith(prefix + "test")) {
+  if (message.content.startsWith(prefix + "magik")) {
     let args = message.content.split(" ").slice(1);
     let member = message.mentions.users.first();
 	  let	user = member;
-
-    message.channel.fetchMessages({ limit: 100 }).then(mes => {
-      const options = {
-      url: `https://nekobot.xyz/api/imagegen?type=magik&image=${mes.attachments.first().url}`,
-      json: true
-    };
-    message.channel.startTyping();
-    setTimeout(() => {
-      message.channel.stopTyping();
-    }, Math.random() * (1 - 3) + 1 * 1000);
-    get(options).then(body => {
-      message.channel.send({
-        files: [
-          {
-            name: "magik.png",
-            attachment: body.message
-          }
-        ]
-      });
-    });
-});
-    
+    if(user) {
     const options = {
       url: `https://nekobot.xyz/api/imagegen?type=magik&image=${user.displayAvatarURL}`,
       json: true
@@ -448,13 +423,75 @@ client.on("message", message => {
     }, Math.random() * (1 - 3) + 1 * 1000);
     get(options).then(body => {
       message.channel.send({
-        files: [
-          {
+        files: [{
             name: "magik.png",
             attachment: body.message
-          }
-        ]
+          }]
       });
     });
+    } else {
+    message.channel.fetchMessages({ limit: 25 }).then(messages => {
+const result = messages.filter(m => m.attachments.size);
+ if(!result.first()) return message.channel.send("Usage \`!!magik [image/recent]\`")
+  const options = {
+      url: `https://nekobot.xyz/api/imagegen?type=magik&image=${result.first().attachments.first().url}`,
+      json: true
+    };
+    message.channel.startTyping();
+    setTimeout(() => {
+      message.channel.stopTyping();
+    }, Math.random() * (1 - 3) + 1 * 1000);
+    get(options).then(body => {
+      message.channel.send({
+        files: [{
+            name: "magik.png",
+            attachment: body.message
+          }]
+      });
+    });
+    })
+ }}
+});
+
+client.on("message", message => {
+  let args = message.content.split(" ").slice(1);
+  if (message.content.startsWith(prefix + "howgay")) {
+    let args = message.content.split(" ").slice(1);
+    var time = Date.now();
+	  let member = message.mentions.users.first();
+	  var user;
+	  if (!member && !args[0]) {
+		user = message.author;
+  	} else if (args[0] && !member) {
+		if (isNaN(args[0])) return message.reply('Not a user ID');
+		user = client.users.get(args[0]);
+		if (!user) return message.reply('User not found <:Gennys_Detective:683643216507043892>');
+	  } else {
+		user = member;
+	  }
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+    if (!args[0]) {
+      const howgayembed = new Discord.RichEmbed()
+        .setTitle(`🏳️‍🌈 How Gay?`)
+        .setDescription(
+          `${user.username} is **` + getRandomInt(101) + `**% gay!`
+        )
+        .setImage(
+          "https://media.tenor.com/images/9baa9cd1467cd8b33a12b353d4392441/tenor.gif"
+        );
+      message.channel.send(howgayembed);
+    } else {
+      const howgayembed = new Discord.RichEmbed()
+        .setTitle(`🏳️‍🌈 How Gay? `)
+        .setDescription(
+          `${user.username} is **` + getRandomInt(101) + `**% gay!`
+        )
+        .setImage(
+          "https://media.tenor.com/images/9baa9cd1467cd8b33a12b353d4392441/tenor.gif"
+        );
+      message.channel.send(howgayembed);
+    }
   }
 });

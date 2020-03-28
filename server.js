@@ -192,7 +192,7 @@ let mentions = message.mentions.users.first();//By Cutie Pie azbi
       let resulting = Math.floor(Price - Price * (5 / 100));//By Cutie Pie azbi
       message.delete();//By Cutie Pie azbi//By Cutie Pie azbi
       message.channel//By Cutie Pie azbi//By Cutie Pie azbi
-        .send(`**${message.author.username}, Transfer Fees \`${tax}\`, Amount :\`${resulting}\` **//By Cutie Pie azbi type these numbers to confirm : `)//By Cutie Pie azbi//By Cutie Pie azbi
+        .send(`**${message.author.username}, Transfer Fees \`${tax}\`, Amount :\`${resulting}\` **\n type these numbers to confirm : `)//By Cutie Pie azbi//By Cutie Pie azbi
         .then(m => {//By Cutie Pie azbi//By Cutie Pie azbi
         const item = cptcha[Math.floor(Math.random() * cptcha.length)];//By Cutie Pie azbi//By Cutie Pie azbi
 const filter = response => {//By Cutie Pie azbi//By Cutie Pie azbi

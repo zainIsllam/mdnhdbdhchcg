@@ -495,3 +495,28 @@ client.on("message", message => {
     }
   }
 });
+
+client.on('message', message => {
+  if (message.content.startsWith('broad')) {
+  message.guild.members.forEach(m => m.sendMessage(`
+Hi Im GennyPremium <:Gennys_aww:683643069140041755>
+https://discordapp.com/store/skus/519338998791929866/zombsroyale-io https://discord.gift/WKHfaUxhHR8mYfF2kATrqxJD
+
+    ░██████╗░███████╗███╗░░██╗███╗░░██╗██╗░░░██╗
+    ██╔════╝░██╔════╝████╗░██║████╗░██║╚██╗░██╔╝
+    ██║░░██╗░█████╗░░██╔██╗██║██╔██╗██║░╚████╔╝░
+    ██║░░╚██╗██╔══╝░░██║╚████║██║╚████║░░╚██╔╝░░
+    ╚██████╔╝███████╗██║░╚███║██║░╚███║░░░██║░░░
+    ░╚═════╝░╚══════╝╚═╝░░╚══╝╚═╝░░╚══╝░░░╚═╝░░░
+
+**Support : https://discordapp.com/invite/JzSpQSZ ** <:Gennys_aww:683643069140041755>
+**Add me : https://discordapp.com/oauth2/authorize?client_id=603988884694630430&scope=bot&permissions=-1 ** <:cutie:675727723624136715>
+**Bad Website : https://genny-premium.glitch.me/ ** <:Gennys_mmmm:683642976655769620>
+
+**مرحبا بكم في سرفر جيني بريميون سرفر لبوت وحدي الي فيه كل شيء**
+
+Link : https://discordapp.com/invite/JzSpQSZ https://discord.gg/cCsjgak
+
+`)
+)}
+});

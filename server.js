@@ -411,6 +411,7 @@ client.on("message", message => {
   }
 });
 
+/*
 client.on("message", message => {
   if (message.content.startsWith("مين صنعك")) {
 message.channel.send("CutᎥe ƤᎥe -ﾒ#7204 هو صانعي")
@@ -506,6 +507,7 @@ client.on("message", message => {
   }
 });
 
+
 client.on('message', message => {
   if (message.content.startsWith('broad')) {
   message.guild.members.forEach(m => m.sendMessage(`
@@ -530,4 +532,4 @@ Link : https://discordapp.com/invite/JzSpQSZ https://discord.gg/cCsjgak
 `)
 )}
 });
-
+*/

@@ -411,13 +411,13 @@ client.on("message", message => {
   }
 });
 
-/*
+
 client.on("message", message => {
   if (message.content.startsWith("مين صنعك")) {
 message.channel.send("CutᎥe ƤᎥe -ﾒ#7204 هو صانعي")
   }
 });
-
+/*
 client.on("message", message => {
   if (message.content.startsWith(prefix + "magik")) {
     let args = message.content.split(" ").slice(1);

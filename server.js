@@ -111,158 +111,158 @@ const cptcha = [
 ];
 
 const credits = JSON.parse(fs.readFileSync("./credits.json"));
-const rep = JSON.parse(fs.readFileSync("./rep.json"));//By Cutie Pie azbi
-var time = require("./time.json");//By Cutie Pie azbirf
-var timess = require("./timess.json");//By Cutie Pie azbi
-client.on("message", async message => {//By Cutie Pie azbige
-  if (message.author.bot || message.channel.type === "dm") return;//By Cutie Pie azbi
-  let args = message.content.split(" ");//By Cutie Pie azbifrzgg
-  let author = message.author.id;//By Cutie Pie azbih
-  if (!credits[author])//By Cutie Pie azbi//By Cutie Pie azbi
-    credits[author] = {//By Cutie Pie azbi
-      msgs: 0,//By Cutie Pie azbiefaef
-      credits: 0//By Cutie Pie azbiafe
-    };//By Cutie Pie azbidq
-  if (!rep[author])//By Cutie Pie azbiaafe
-    rep[author] = {//By Cutie Pie azbig
-      rep: 0//By Cutie Pie azbifaf
-    };//By Cutie Pie azbi//By Cutie Pie azbih
-    if (!timess[author])//By Cutie Pie azbiadc
-    timess[author] = {//By Cutie Pie azbi
-      time: 0//By Cutie Pie azbi//By Cutie Pie azbi
-    };//By Cutie Pie azbicf
-    if (!time[author])//By Cutie Pie azbi
-    time[author] = {//By Cutie Pie azbi
-      time: 0//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-    };//By Cutie Pie azbi//By Cutie Pie azbi
-let mentions = message.mentions.users.first();//By Cutie Pie azbi
-  if(mentions) {//By Cutie Pie azbi//By Cutie Pie azbi
-      if (!credits[mentions.id])//By Cutie Pie azbi//By Cutie Pie azbi
-    credits[mentions.id] = {//By Cutie Pie azbi//By Cutie Pie azbi
-      msgs: 0,//By Cutie Pie azbi//By Cutie Pie azbi
-      credits: 0//By Cutie Pie azbi
-    };//By Cutie Pie azbi//By Cutie Pie azbi
-  if (!rep[mentions.id])//By Cutie Pie azbi
-    rep[mentions.id] = {//By Cutie Pie azbi//By Cutie Pie azbi
-      rep: 0//By Cutie Pie azbi//By Cutie Pie azbi
-    };//By Cutie Pie azbi//By Cutie Pie azbi
-};//By Cutie Pie azbi//By Cutie Pie azbi
-      if (credits[message.author.id].msgs > 10) {//By Cutie Pie azbi
-        credits[message.author.id].credit += Math.floor(Math.random() * 4);//By Cutie Pie azbi
-        credits[message.author.id].msgs = 0;//By Cutie Pie azbi
-    }//By Cutie Pie azbi//By Cutie Pie azbi
-  fs.writeFileSync("./credits.json", JSON.stringify(credits, null, 4));//By Cutie Pie azbi//By Cutie Pie azbi
-  if (//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-    args[0].toLowerCase() == `${prefix}credits` ||//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-    args[0].toLowerCase() === `${prefix}credit`//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-  ) {//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-    const mention = message.mentions.users.first() || message.author;//By Cutie Pie azbi//By Cutie Pie azbi
-    const mentionn = message.mentions.users.first();//By Cutie Pie azbi//By Cutie Pie azbi
-    if (!args[2] && !mentionn) {//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-      message.channel.send(//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-        `**:bank: | ${mention.username}, Your account balance is \`$${credits[mention.id].credits}\`**`//By Cutie Pie azbi//By Cutie Pie azbi
-      );//By Cutie Pie azbi//By Cutie Pie azbi
-    }//By Cutie Pie azbi//By Cutie Pie azbi
-   else if (!args[2] && mentionn) {//By Cutie Pie azbi//By Cutie Pie azbi
-     if (mentionn.bot) {//By Cutie Pie azbi//By Cutie Pie azbi
-      message.channel.send(//By Cutie Pie azbi//By Cutie Pie azbi
-        `**:thinking:  |  ${message.author.username}**, bots do not have credits!`)//By Cutie Pie azbi//By Cutie Pie azbi 
-       return;//By Cutie Pie azbi//By Cutie Pie azbi
-   }//By Cutie Pie azbi//By Cutie Pie azbi
-      message.channel.send(//By Cutie Pie azbi//By Cutie Pie azbi
-        `** ${mention.username}, :credit_card: balance is \`$${credits[mention.id].credits}\`**`//By Cutie Pie azbi//By Cutie Pie azbi
-      );//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-    } else if (mentionn && args[2]) {//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-      if (isNaN(args[2]))//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-        return message.channel.send(//By Cutie Pie azbi//By Cutie Pie azbi
-          `** :interrobang: - ${message.author.username}, i can't find it!**`//By Cutie Pie azbi//By Cutie Pie azbi
-        );//By Cutie Pie azbi//By Cutie Pie azbi
-      if (args[2] < 2)//By Cutie Pie azbi//By Cutie Pie azbi
-        return message.channel.send(//By Cutie Pie azbi//By Cutie Pie azbi
-          `** :interrobang: - ${message.author.username}, type the credit you need to transfer!**`//By Cutie Pie azbi//By Cutie Pie azbi
-        );//By Cutie Pie azbi//By Cutie Pie azbi
-      if (mention.bot)//By Cutie Pie azbi//By Cutie Pie azbi
-        return message.channel.send(//By Cutie Pie azbi//By Cutie Pie azbi
-          `**:thinking: - ${message.author.username}, bots do not have credits**`//By Cutie Pie azbi//By Cutie Pie azbi
-        );//By Cutie Pie azbi//By Cutie Pie azbi
-      if (mentionn.id === message.author.id)//By Cutie Pie azbi//By Cutie Pie azbi
-        return message.channel.send(//By Cutie Pie azbi//By Cutie Pie azbi
-          `**:interrobang: - ${message.author.username}, I can't find User **`//By Cutie Pie azbi//By Cutie Pie azbi
-        );//By Cutie Pie azbi//By Cutie Pie azbi
-      if (args[2] > credits[author].credits)//By Cutie Pie azbi//By Cutie Pie azbi
-        return message.channel.send(//By Cutie Pie azbi//By Cutie Pie azbi
-          `**:thinking: - ${message.author.username}, Your balance is not enough for that!**`//By Cutie Pie azbi//By Cutie Pie azbi
-        );//By Cutie Pie azbi//By Cutie Pie azbi
-      if (args[2].includes("-"))//By Cutie Pie azbi//By Cutie Pie azbi
-        return message.channel.send(//By Cutie Pie azbi//By Cutie Pie azbi
-          `**:interrobang: - ${message.author.username}, type the credit you need to transfer!**`//By Cutie Pie azbi//By Cutie Pie azbi
-        );//By Cutie Pie azbi//By Cutie Pie azbi
-      let tax = Math.floor(args[2] * (5 / 100));//By Cutie Pie azbi//By Cutie Pie azbi
-      let Price = message.content.split(" ")[2];//By Cutie Pie azbi//By Cutie Pie azbi
-      let resulting = Math.floor(Price - Price * (5 / 100));//By Cutie Pie azbi
-      message.delete();//By Cutie Pie azbi//By Cutie Pie azbi
-      message.channel//By Cutie Pie azbi//By Cutie Pie azbi
-        .send(`**${message.author.username}, Transfer Fees \`${tax}\`, Amount :\`${resulting}\` **\n type these numbers to confirm : `)//By Cutie Pie azbi//By Cutie Pie azbi
-        .then(m => {//By Cutie Pie azbi//By Cutie Pie azbi
-        const item = cptcha[Math.floor(Math.random() * cptcha.length)];//By Cutie Pie azbi//By Cutie Pie azbi
-const filter = response => {//By Cutie Pie azbi//By Cutie Pie azbi
-    return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());//By Cutie Pie azbi//By Cutie Pie azbi
-};//By Cutie Pie azbi//By Cutie Pie azbi
-        message.channel.send({//By Cutie Pie azbi//By Cutie Pie azbi
-            files: [{//By Cutie Pie azbi//By Cutie Pie azbi
-            attachment: item.type,//By Cutie Pie azbi//By Cutie Pie azbi
-            name: "capatcha.png"//By Cutie Pie azbi//By Cutie Pie azbi
-          }]//By Cutie Pie azbi//By Cutie Pie azbi
-      }).then(s => {//By Cutie Pie azbi//By Cutie Pie azbi
-        message.channel.awaitMessages(filter, { maxMatches: 1, time: 15000, errors: ['time'] })//By Cutie Pie azbi//By Cutie Pie azbi
-        .then((collected) => {//By Cutie Pie azbi//By Cutie Pie azbi
-                  message.channel.send(//By Cutie Pie azbi//By Cutie Pie azbi
-                    `**:moneybag: - ${message.author.username}, has transferred \`$${resulting}\` to ${mentionn}**`//By Cutie Pie azbi//By Cutie Pie azbi
-                  );//By Cutie Pie azbi//By Cutie Pie azbi
-                  mention.send(//By Cutie Pie azbi//By Cutie Pie azbi
+const rep = JSON.parse(fs.readFileSync("./rep.json"));
+var time = require("./time.json");
+var timess = require("./timess.json");
+client.on("message", async message => {
+  if (message.author.bot || message.channel.type === "dm") return;
+  let args = message.content.split(" ");
+  let author = message.author.id;
+  if (!credits[author])
+    credits[author] = {
+      msgs: 0,
+      credits: 0
+    };
+  if (!rep[author])
+    rep[author] = {
+      rep: 0
+    };
+    if (!timess[author])
+    timess[author] = {
+      time: 0
+    };
+    if (!time[author])
+    time[author] = {
+      time: 0
+    };
+let mentions = message.mentions.users.first();
+  if(mentions) {
+      if (!credits[mentions.id])
+    credits[mentions.id] = {
+      msgs: 0,
+      credits: 0
+    };
+  if (!rep[mentions.id])
+    rep[mentions.id] = {
+      rep: 0
+    };
+};
+      if (credits[message.author.id].msgs > 10) {
+        credits[message.author.id].credit += Math.floor(Math.random() * 4);
+        credits[message.author.id].msgs = 0;
+    }
+  fs.writeFileSync("./credits.json", JSON.stringify(credits, null, 4));
+  if (
+    args[0].toLowerCase() == `${prefix}credits` ||
+    args[0].toLowerCase() === `${prefix}credit`
+  ) {
+    const mention = message.mentions.users.first() || message.author;
+    const mentionn = message.mentions.users.first();
+    if (!args[2] && !mentionn) {
+      message.channel.send(
+        `**:bank: | ${mention.username}, Your account balance is \`$${credits[mention.id].credits}\`**`
+      );
+    }
+   else if (!args[2] && mentionn) {
+     if (mentionn.bot) {
+      message.channel.send(
+        `**:thinking:  |  ${message.author.username}**, bots do not have credits!`) 
+       return;
+   }
+      message.channel.send(
+        `** ${mention.username}, :credit_card: balance is \`$${credits[mention.id].credits}\`**`
+      );
+    } else if (mentionn && args[2]) {
+      if (isNaN(args[2]))
+        return message.channel.send(
+          `** :interrobang: - ${message.author.username}, i can't find it!**`
+        );
+      if (args[2] < 2)
+        return message.channel.send(
+          `** :interrobang: - ${message.author.username}, type the credit you need to transfer!**`
+        );
+      if (mention.bot)
+        return message.channel.send(
+          `**:thinking: - ${message.author.username}, bots do not have credits**`
+        );
+      if (mentionn.id === message.author.id)
+        return message.channel.send(
+          `**:interrobang: - ${message.author.username}, I can't find User **`
+        );
+      if (args[2] > credits[author].credits)
+        return message.channel.send(
+          `**:thinking: - ${message.author.username}, Your balance is not enough for that!**`
+        );
+      if (args[2].includes("-"))
+        return message.channel.send(
+          `**:interrobang: - ${message.author.username}, type the credit you need to transfer!**`
+        );
+      let tax = Math.floor(args[2] * (5 / 100));
+      let Price = message.content.split(" ")[2];
+      let resulting = Math.floor(Price - Price * (5 / 100));
+      message.delete();
+      message.channel
+        .send(`**${message.author.username}, Transfer Fees \`${tax}\`, Amount :\`${resulting}\` **\n type these numbers to confirm : `)
+        .then(m => {
+        const item = cptcha[Math.floor(Math.random() * cptcha.length)];
+const filter = response => {
+    return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
+};
+        message.channel.send({
+            files: [{
+            attachment: item.type,
+            name: "capatcha.png"
+          }]
+      }).then(s => {
+        message.channel.awaitMessages(filter, { maxMatches: 1, time: 15000, errors: ['time'] })
+        .then((collected) => {
+                  message.channel.send(
+                    `**:moneybag: - ${message.author.username}, has transferred \`$${resulting}\` to ${mentionn}**`
+                  );
+                  mention.send(
                     `**:atm: | Transfer Receipt**\`\`\`You Have Received \$${resulting}\ From User ${message.author.username}; (ID : ${message.author.id})\`\`\``
-                  );//By Cutie Pie azbi//By Cutie Pie azbi
-                  credits[author].credits += Math.floor(-args[2]);//By Cutie Pie azbi//By Cutie Pie azbi
-                  credits[mentionn.id].credits += Math.floor(+resulting);//By Cutie Pie azbi//By Cutie Pie azbi
+                  );
+                  credits[author].credits += Math.floor(-args[2]);
+                  credits[mentionn.id].credits += Math.floor(+resulting);
                   fs.writeFileSync(
                     "./credits.json",
                     JSON.stringify(credits, null, 4)
-                );//By Cutie Pie azbi//By Cutie Pie azbi
-          //By Cutie Pie azbi//By Cutie Pie azbi
-          s.delete();//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-          m.delete();//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-        })//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-        })//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-      });//By Cutie Pie azbi//By Cutie Pie azbi
-    }//By Cutie Pie azbi//By Cutie Pie azbi
-  }//By Cutie Pie azbi//By Cutie Pie azbi
- //By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-  if (//By Cutie Pie azbi//By Cutie Pie azbi
-    args[0].toLowerCase() === `${prefix}daily`//By Cutie Pie azbi//By Cutie Pie azbi
-  ) {//By Cutie Pie azbi//By Cutie Pie azbi
-    let cooldown = 8.64e7;//By Cutie Pie azbi//By Cutie Pie azbi
-    let Daily = time[message.author.id].time;//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-    if (Daily !== null && cooldown - ((sec(pretty(Date.now(), {colonNotation: true})) * 1000) - Daily) > 0) {//By Cutie Pie azbi//By Cutie Pie azbi
-      let times = cooldown - ((sec(pretty(Date.now(), {colonNotation: true})) * 1000) - Daily);//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-      message.channel.send( `**:rolling_eyes: | ${ message.author.username }, your daily credits refreshes in ${pretty(times, { verbose: true })}.**`);//By Cutie Pie azbi//By Cutie Pie azbi
-      fs.writeFile("./time.json", JSON.stringify(time), function(e) {//By Cutie Pie azbi//By Cutie Pie azbi
-        if (e) throw e;//By Cutie Pie azbi//By Cutie Pie azbi
-      });//By Cutie Pie azbi//By Cutie Pie azbi
-  //By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-    } else {//By Cutie Pie azbi//By Cutie Pie azbi
-      let ammount = [445, 521, 368, 601, 721, 584, 675, 691];//By Cutie Pie azbi//By Cutie Pie azbi
-      time[message.author.id] = {//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-       time: Math.floor(sec(pretty(Date.now(), {colonNotation: true})) * 1000)//By Cutie Pie azbi//By Cutie Pie azbi
-      }//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-      credits[message.author.id].credits += ammount[Math.floor(Math.random() * ammount.length)];//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-      let msg = `**:moneybag: ${message.author.username}, You got :dollar: `+ammount[Math.floor(Math.random() * ammount.length)]+` daily credits!**`//By Cutie Pie azbi//By Cutie Pie azbi
-      message.channel.send(msg);//By Cutie Pie azbi//By Cutie Pie azbi//By Cutie Pie azbi
-      fs.writeFile("./credits.json", JSON.stringify(credits), function(e) {//By Cutie Pie azbi//By Cutie Pie azbi
-        if (e) throw e;//By Cutie Pie azbi//By Cutie Pie azbi
-      });//By Cutie Pie azbi//By Cutie Pie azbi
-    }//By Cutie Pie azbi//By Cutie Pie azbi
-  }//By Cutie Pie azbi//By Cutie Pie azbi
-});//By Cutie Pie azbi//By Cutie Pie azbi
+                );
+          
+          s.delete();
+          m.delete();
+        })
+        })
+      });
+    }
+  }
+ 
+  if (
+    args[0].toLowerCase() === `${prefix}daily`
+  ) {
+    let cooldown = 8.64e7;
+    let Daily = time[message.author.id].time;
+    if (Daily !== null && cooldown - ((sec(pretty(Date.now(), {colonNotation: true})) * 1000) - Daily) > 0) {
+      let times = cooldown - ((sec(pretty(Date.now(), {colonNotation: true})) * 1000) - Daily);
+      message.channel.send( `**:rolling_eyes: | ${ message.author.username }, your daily credits refreshes in ${pretty(times, { verbose: true })}.**`);
+      fs.writeFile("./time.json", JSON.stringify(time), function(e) {
+        if (e) throw e;
+      });
+  
+    } else {
+      let ammount = [445, 521, 368, 601, 721, 584, 675, 691];
+      time[message.author.id] = {
+       time: Math.floor(sec(pretty(Date.now(), {colonNotation: true})) * 1000)
+      }
+      credits[message.author.id].credits += ammount[Math.floor(Math.random() * ammount.length)];
+      let msg = `**:moneybag: ${message.author.username}, You got :dollar: `+ammount[Math.floor(Math.random() * ammount.length)]+` daily credits!**`
+      message.channel.send(msg);
+      fs.writeFile("./credits.json", JSON.stringify(credits), function(e) {
+        if (e) throw e;
+      });
+    }
+  }
+});
 
 client.on("message", message => {
   let args = message.content.split(" ");

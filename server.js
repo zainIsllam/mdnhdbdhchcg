@@ -426,13 +426,23 @@ client.on("message", message => {
   let member = message.mentions.users.first();
   if(args[0] && !args[1]) {
     const emb = new Discord.RichEmbed()
-    
-    
-    
+    .setTitle("Command: ban")
+    .setDescription("Bans a member.")
+    .addField("**Usage:**", `#ban [user] [time m/h/d/mo/y] [reason]`)
+    .addField("**Examples:**", `
+${prefix}ban ${message.author}
+${prefix}ban ${message.author} spamming
+${prefix}ban ${message.author} 1h spamming
+${prefix}ban ${message.author} 1d spamming
+${prefix}ban ${message.author} 1w
+`)
     
      message.channel.sendEmbed(emb);
   }
   if(member) {
+  message.guild.ban(member, `${message.author.username} banned this user with `).then(() => {
+})
+		message.channel.send(`** :white_check_mark: ${message.author.username} banned from the server! :airplane: **`);
 
   
   
@@ -441,7 +451,7 @@ client.on("message", message => {
 
   message.guild.ban(user, `${message.author.username} banned this user with `).then(() => {
 })
-		message.channel.send(``);
+		message.channel.send(`** :white_check_mark: ${message.author.username} banned from the server! :airplane: **`);
           
           
       })

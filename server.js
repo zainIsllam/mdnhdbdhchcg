@@ -514,12 +514,13 @@ client.on("message", async message => {
 client.on("message", async message => {
   if (message.content.startsWith(prefix + "unlock")) {
         if(!message.member.hasPermission('MANAGE_CHANNELS')) return
-    if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return message.channelsend(`**${message.author.username}**,`+"I Don't Have `MANAGE_CHANNELS` Permission <:cutie:675727723624136715>")
+    if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return;
     message.channel.overwritePermissions(message.guild.id, {
       SEND_MESSAGES: null
     });
-    message.react("675727803433615406");
-    return;
+ message.channel.send(
+      `🔓 ${message.channel} **has been unlocked.**`
+    );
   }
 });
 

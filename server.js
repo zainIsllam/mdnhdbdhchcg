@@ -461,6 +461,34 @@ ${prefix}ban ${message.author} 1w
 });
 
 client.on("message", message => {
+  let command = message.content.split(" ")[0];
+  if (command == prefix + "unban") {
+    if (!message.member.hasPermission("BAN_MEMBERS")) return;
+let args = message.content.split(" ");
+    if(args[0] && !args[1]) {
+    const emb = new Discord.RichEmbed()
+    .setTitle("Command: unban")
+    .setDescription("Unbans a member.")
+    .addField("**Usage:**", `${prefix}unban [username / user id]`)
+    .addField("**Examples:**", `
+${prefix}ban ${message.author}
+${prefix}ban ${message.author.id}
+`)
+     message.channel.sendEmbed(emb)
+  return;
+  }
+    message.guild.unban(args[1]).then(m => {
+        message.channel.send(`:white_check_mark: **${m.username}** unbanned!`);
+      })
+      .catch(stry => {
+        message.channel.send(
+          `**:rolling_eyes: -  I can't find ${args[1]} in the ban list**`
+        );
+      });
+  }
+});
+
+client.on("message", message => {
   let args = message.content.split(" ");
   if (message.author.bot) return;
   if (!message.member.hasPermission("BAN_MEMBERS")) return;
@@ -524,119 +552,4 @@ client.on("message", async message => {
   }
 });
 
-/*
-client.on("message", message => {
-  if (message.content.startsWith(prefix + "magik")) { // mzn
-    let args = message.content.split(" ").slice(1);
-    let member = message.mentions.users.first();
-	  let	user = member;
-    if(user) {
-    const options = {
-      url: `https://nekobot.xyz/api/imagegen?type=magik&image=${user.displayAvatarURL}`,
-      json: true
-    };
-    message.channel.startTyping();
-    setTimeout(() => {
-      message.channel.stopTyping();
-    }, Math.random() * (1 - 3) + 1 * 1000);
-    get(options).then(body => {
-      message.channel.send({
-        files: [{
-            name: "magik.png",
-            attachment: body.message
-          }]
-      });
-    });
-    } else {
-    message.channel.fetchMessages({ limit: 25 }).then(messages => {
-const result = messages.filter(m => m.attachments.size);
- if(!result.first()) return message.channel.send("Usage \`!!magik [image/recent]\`")
-  const options = {
-      url: `https://nekobot.xyz/api/imagegen?type=magik&image=${result.first().attachments.first().url}`,
-      json: true
-    };
-    message.channel.startTyping();
-    setTimeout(() => {
-      message.channel.stopTyping();
-    }, Math.random() * (1 - 3) + 1 * 1000);
-    get(options).then(body => {
-      message.channel.send({
-        files: [{
-            name: "magik.png",
-            attachment: body.message
-          }]
-      });
-    });
-    })
- }}
-});
 
-client.on("message", message => {
-  let args = message.content.split(" ").slice(1);
-  if (message.content.startsWith(prefix + "howgay")) {
-    let args = message.content.split(" ").slice(1);
-    var time = Date.now();
-	  let member = message.mentions.users.first();
-	  var user;
-	  if (!member && !args[0]) {
-		user = message.author;
-  	} else if (args[0] && !member) {
-		if (isNaN(args[0])) return message.reply('Not a user ID');
-		user = client.users.get(args[0]);
-		if (!user) return message.reply('User not found <:Gennys_Detective:683643216507043892>');
-	  } else {
-		user = member;
-	  }
-    function getRandomInt(max) {
-      return Math.floor(Math.random() * Math.floor(max));
-    }
-    if (!args[0]) {
-      const howgayembed = new Discord.RichEmbed()
-        .setTitle(`🏳️‍🌈 How Gay?`)
-        .setDescription(
-          `${user.username} is **` + getRandomInt(101) + `**% gay!`
-        )
-        .setImage(
-          "https://media.tenor.com/images/9baa9cd1467cd8b33a12b353d4392441/tenor.gif"
-        );
-      message.channel.send(howgayembed);
-    } else {
-      const howgayembed = new Discord.RichEmbed()
-        .setTitle(`🏳️‍🌈 How Gay? `)
-        .setDescription(
-          `${user.username} is **` + getRandomInt(101) + `**% gay!`
-        )
-        .setImage(
-          "https://media.tenor.com/images/9baa9cd1467cd8b33a12b353d4392441/tenor.gif"
-        );
-      message.channel.send(howgayembed);
-    }
-  }
-});
-
-
-client.on('message', message => {
-  if (message.content.startsWith('broad')) {
-  message.guild.members.forEach(m => m.sendMessage(`
-Hi Im GennyPremium <:Gennys_aww:683643069140041755>
-https://discordapp.com/store/skus/519338998791929866/zombsroyale-io https://discord.gift/WKHfaUxhHR8mYfF2kATrqxJD
-
-    ░██████╗░███████╗███╗░░██╗███╗░░██╗██╗░░░██╗
-    ██╔════╝░██╔════╝████╗░██║████╗░██║╚██╗░██╔╝
-    ██║░░██╗░█████╗░░██╔██╗██║██╔██╗██║░╚████╔╝░
-    ██║░░╚██╗██╔══╝░░██║╚████║██║╚████║░░╚██╔╝░░
-    ╚██████╔╝███████╗██║░╚███║██║░╚███║░░░██║░░░
-    ░╚═════╝░╚══════╝╚═╝░░╚══╝╚═╝░░╚══╝░░░╚═╝░░░
-
-**Support : https://discordapp.com/invite/JzSpQSZ ** <:Gennys_aww:683643069140041755>
-**Add me : https://discordapp.com/oauth2/authorize?client_id=603988884694630430&scope=bot&permissions=-1 ** <:cutie:675727723624136715>
-**Bad Website : https://genny-premium.glitch.me/ ** <:Gennys_mmmm:683642976655769620>
-
-**مرحبا بكم في سرفر جيني بريميون سرفر لبوت وحدي الي فيه كل شيء**
-
-Link : https://discordapp.com/invite/JzSpQSZ https://discord.gg/cCsjgak
-
-`)
-)}
-});
-*/

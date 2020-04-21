@@ -476,7 +476,6 @@ client.on("message", message => {
 ${prefix}kick ${message.author} 
 ${prefix}kick ${message.author.id}
 `)
-    ban wax bi time 3ndek  ?
      message.channel.sendEmbed(emb);
   }
   if(member) {
@@ -496,6 +495,31 @@ ${prefix}kick ${message.author.id}
           
       })
     }
+  }
+});
+
+client.on("message", async message => {
+  if (message.content.startsWith(prefix + "lock")) {
+    if(!message.member.hasPermission('MANAGE_CHANNELS')) return
+    if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return;
+    message.channel.overwritePermissions(message.guild.id, {
+      SEND_MESSAGES: false
+    });
+    message.channel.send(
+      `🔒 ${message.channel} **has been locked.**`
+    );
+  }
+});
+
+client.on("message", async message => {
+  if (message.content.startsWith(prefix + "unlock")) {
+        if(!message.member.hasPermission('MANAGE_CHANNELS')) return
+    if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return message.channelsend(`**${message.author.username}**,`+"I Don't Have `MANAGE_CHANNELS` Permission <:cutie:675727723624136715>")
+    message.channel.overwritePermissions(message.guild.id, {
+      SEND_MESSAGES: null
+    });
+    message.react("675727803433615406");
+    return;
   }
 });
 

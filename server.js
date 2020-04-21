@@ -492,7 +492,7 @@ client.on("message", message => {
   let args = message.content.split(" ");
   if (message.author.bot) return;
   if (!message.member.hasPermission("BAN_MEMBERS")) return;
- if (args[0].toLowerCase() === `${prefix}0kick`) {
+ if (args[0].toLowerCase() === `${prefix}kick`) {
    let reason = message.content.split(" ").slice(2).join(" ");
   let member = message.mentions.users.first();
   if(args[0] && !args[1]) {

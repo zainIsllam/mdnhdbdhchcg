@@ -492,7 +492,7 @@ client.on("message", message => {
   let args = message.content.split(" ");
   if (message.author.bot) return;
   if (!message.member.hasPermission("BAN_MEMBERS")) return;
- if (args[0].toLowerCase() === `${prefix}kick`) {
+ if (args[0].toLowerCase() === `${prefix}0kick`) {
    let reason = message.content.split(" ").slice(2).join(" ");
   let member = message.mentions.users.first();
   if(args[0] && !args[1]) {
@@ -507,7 +507,7 @@ ${prefix}kick ${message.author.id}
      message.channel.sendEmbed(emb);
   }
   if(member) {
-  message.guild.kick(member, `By: ${message.author.username}, REASON: ${reason || " "}`).then(() => {
+  member.kick(member, `By: ${message.author.username}, REASON: ${reason || " "}`).then(() => {
 })
 		message.channel.send(`** :white_check_mark: @${member.user.displayName} kicked from the server!  **`);
 
@@ -516,7 +516,7 @@ ${prefix}kick ${message.author.id}
   }else if(args[1] && !member) {
           client.fetchUser(args[1]).then(user => {
 
-  message.guild.kick(user, `By: ${message.author.username}, REASON: ${reason || " "}`).then(() => {
+  user.kick(user, `By: ${message.author.username}, REASON: ${reason || " "}`).then(() => {
 })
 		message.channel.send(`** :white_check_mark: @${user.username} kicked from the server! **`);
           

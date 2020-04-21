@@ -423,12 +423,13 @@ client.on("message", message => {
   if (message.author.bot) return;
   if (!message.member.hasPermission("BAN_MEMBERS")) return;
  if (args[0].toLowerCase() === `${prefix}ban`) {
+   let reason = message.content.split(" ").slice(2).join(" ");
   let member = message.mentions.users.first();
   if(args[0] && !args[1]) {
     const emb = new Discord.RichEmbed()
     .setTitle("Command: ban")
     .setDescription("Bans a member.")
-    .addField("**Usage:**", `#ban [user] [time m/h/d/mo/y] [reason]`)
+    .addField("**Usage:**", `${prefix}ban [user] [time m/h/d/mo/y] [reason]`)
     .addField("**Examples:**", `
 ${prefix}ban ${message.author}
 ${prefix}ban ${message.author} spamming
@@ -440,18 +441,57 @@ ${prefix}ban ${message.author} 1w
      message.channel.sendEmbed(emb);
   }
   if(member) {
-  message.guild.ban(member, `${message.author.username} banned this user with `).then(() => {
+  message.guild.ban(member, `By: ${message.author.username}, REASON: ${reason || " "}`).then(() => {
 })
-		message.channel.send(`** :white_check_mark: ${message.author.username} banned from the server! :airplane: **`);
+		message.channel.send(`** :white_check_mark: ${member.user.displayName} banned from the server! :airplane: **`);
 
   
   
   }else if(args[1] && !member) {
           client.fetchUser(args[1]).then(user => {
 
-  message.guild.ban(user, `${message.author.username} banned this user with `).then(() => {
+  message.guild.ban(user, `By: ${message.author.username}, REASON: ${reason || " "}`).then(() => {
 })
-		message.channel.send(`** :white_check_mark: ${message.author.username} banned from the server! :airplane: **`);
+		message.channel.send(`** :white_check_mark: ${user.username} banned from the server! :airplane: **`);
+          
+          
+      })
+    }
+  }
+});
+
+client.on("message", message => {
+  let args = message.content.split(" ");
+  if (message.author.bot) return;
+  if (!message.member.hasPermission("BAN_MEMBERS")) return;
+ if (args[0].toLowerCase() === `${prefix}kick`) {
+   let reason = message.content.split(" ").slice(2).join(" ");
+  let member = message.mentions.users.first();
+  if(args[0] && !args[1]) {
+    const emb = new Discord.RichEmbed()
+    .setTitle("Command: kick")
+    .setDescription("Kicks a member.")
+    .addField("**Usage:**", `${prefix}kick [user] [reason]`)
+    .addField("**Examples:**", `
+${prefix}kick ${message.author} 
+${prefix}kick ${message.author.id}
+`)
+    ban wax bi time 3ndek  ?
+     message.channel.sendEmbed(emb);
+  }
+  if(member) {
+  message.guild.kick(member, `By: ${message.author.username}, REASON: ${reason || " "}`).then(() => {
+})
+		message.channel.send(`** :white_check_mark: @${member.user.displayName} kicked from the server!  **`);
+
+  
+  
+  }else if(args[1] && !member) {
+          client.fetchUser(args[1]).then(user => {
+
+  message.guild.kick(user, `By: ${message.author.username}, REASON: ${reason || " "}`).then(() => {
+})
+		message.channel.send(`** :white_check_mark: @${user.username} kicked from the server! **`);
           
           
       })
@@ -461,7 +501,7 @@ ${prefix}ban ${message.author} 1w
 
 /*
 client.on("message", message => {
-  if (message.content.startsWith(prefix + "magik")) {
+  if (message.content.startsWith(prefix + "magik")) { // mzn
     let args = message.content.split(" ").slice(1);
     let member = message.mentions.users.first();
 	  let	user = member;

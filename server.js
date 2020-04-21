@@ -417,6 +417,38 @@ client.on("message", message => {
 message.channel.send("CutᎥe ƤᎥe -ﾒ#7204 هو صانعي")
   }
 });
+
+client.on("message", message => {
+  let args = message.content.split(" ");
+  if (message.author.bot) return;
+  if (!message.member.hasPermission("BAN_MEMBERS")) return;
+ if (args[0].toLowerCase() === `${prefix}ban`) {
+  let member = message.mentions.users.first();
+  if(args[0] && !args[1]) {
+    const emb = new Discord.RichEmbed()
+    
+    
+    
+    
+     message.channel.sendEmbed(emb);
+  }
+  if(member) {
+
+  
+  
+  }else if(args[1] && !member) {
+          client.fetchUser(args[1]).then(user => {
+
+  message.guild.ban(user, `${message.author.username} banned this user with `).then(() => {
+})
+		message.channel.send(``);
+          
+          
+      })
+    }
+  }
+});
+
 /*
 client.on("message", message => {
   if (message.content.startsWith(prefix + "magik")) {

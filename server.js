@@ -309,7 +309,7 @@ client.on("message", message => {
       message.channel.send({
         files: [
           {
-            name: "nekoavatar.png",
+            name: "cutie=HyPeD.png",
             attachment: `https://api.probot.io/profile/${message.author.id}`
           }
         ]
@@ -323,7 +323,7 @@ client.on("message", message => {
       message.channel.send({
         files: [
           {
-            name: "nekoavatar.png",
+            name: "cutie=HyPeD.png",
             attachment: `https://api.probot.io/profile/${member.id}`
           }
         ]
@@ -337,7 +337,7 @@ client.on("message", message => {
       message.channel.send({
         files: [
           {
-            name: "nekoavatar.png",
+            name: "cutie=HyPeD.png",
             attachment: `https://api.probot.io/profile/${userr.id}`
           }
         ]
@@ -413,8 +413,8 @@ client.on("message", message => {
 
 
 client.on("message", message => {
-  if (message.content.startsWith("مين صنعك")) {
-message.channel.send("CutᎥe ƤᎥe -ﾒ#7204 هو صانعي")
+    if (message.content.startsWith("Attention")) {
+message.channel.send("H¥þêÐ#5555 = CutiePie")
   }
 });
 

@@ -385,19 +385,6 @@ client.on("message", message => {
   }
 });
 
-client.on("message", async message => {
-  let args = message.content.split(" ");
-  if (message.content.startsWith(prefix+"help")) {
-    message.author.send(`
-**${message.guild.name}** prefix is \`#\` 
-Commands list at https://probot.io/commands
-Dashboard at https://probot.io/ 
-Join the support server at discord.gg/ProBot.
-`).then(m => message.react("✅")
- )
-  }
-});
-
 client.on("message", message => {
   if (message.content.startsWith(prefix + "ping")) {
     message.channel.send("Pong").then(msg => {

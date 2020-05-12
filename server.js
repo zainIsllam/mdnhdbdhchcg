@@ -169,9 +169,7 @@ let mentions = message.mentions.users.first();
         `**:thinking:  |  ${message.author.username}**, bots do not have credits!`) 
        return;
    }
-      message.channel.send(
-        `** ${mention.username}, :credit_card: balance is \`$${credits[mention.id].credits}\`**`
-      );
+      message.channel.send(`** ${mention.username}, :credit_card: balance is \`$${credits[mention.id].credits}\`**`);
     } else if (mentionn && args[2]) {
       if (isNaN(args[2]))
         return message.channel.send(
